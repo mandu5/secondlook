@@ -32,6 +32,7 @@ def write_report(result: dict, output: Path) -> Path:
     cost = result.get("cost", {})
     offline = result.get("kind") == "offline_reference"
     probe_only = result.get("kind") == "baseline_probe"
+    imported = result.get("kind") == "imported_candidates"
     intent = result.get("capsule", {}).get("intent", {})
     candidates = [key for key in arms if key != "A"]
     candidate = candidates[0] if len(candidates) == 1 else None
@@ -57,6 +58,10 @@ def write_report(result: dict, output: Path) -> Path:
                      if offline else "A → candidate measures changes to this artifact, not pure model uplift.")
     if probe_only:
         workflow_note = "No model was called. Failed checks identify behavior worth investigating; intent confirmation is unchanged."
+    if imported:
+        workflow_note = ("Imported outputs, evaluated locally. Model labels and generation usage are owner-reported and unverified. "
+                         "Zero local model calls does not mean external generation was free. This measures artifact behavior, not model superiority.")
+        headline = headline.replace("revision workflows", "imported candidates").replace("workflow", "candidate")
     if workflow:
         workflow_note += " " + ("Reframing added no measured functional gain over ordinary improvement." if workflow.get("verdict") == "no_measured_gain"
                                   else "Workflow comparison B → C: " + verdicts.get(workflow.get("verdict"), "Inconclusive") + ".")
@@ -76,6 +81,8 @@ def write_report(result: dict, output: Path) -> Path:
         bar_class = {"pass": "ok", "fail": "bad", "unknown": "unknown"}
         bars = "".join(f'<i class="{bar_class[check_state(row)]}" title="{esc(row["id"])}"></i>' for row in evaluation.get("checks", []))
         model = ", ".join(arm.get("models", [])) or "Model unverified"
+        if imported and arm.get("declared_model"):
+            model = "Owner-reported label (unverified): " + arm["declared_model"]
         tokens = arm.get("tokens", {}).get("total")
         token_label = "unreported" if tokens is None else f"{tokens:,}"
         error = f'<p class="error">{esc(arm["error"])}</p>' if arm.get("error") else ""
@@ -83,6 +90,8 @@ def write_report(result: dict, output: Path) -> Path:
                                 + (f' · {score["unmeasured"]} unmeasured' if score["unmeasured"] else '') + '</p>'
                                 for category, score in category_scores(checks, evaluation).items() if category != "uncategorized")
         cap_text = f'<p class="caption">Effective cap {usd(arm["budget_usd"])}</p>' if "budget_usd" in arm else ""
+        if arm.get("evaluation_reused_from"):
+            cap_text += f'<p class="caption">Reused browser evidence from {esc(arm["evaluation_reused_from"])}: identical source. This is not another independent sample.</p>'
         cards.append(f'''<article class="arm"><div class="arm-top"><span class="letter">{esc(name)}</span><span class="state">{esc(arm.get('status','unknown'))}</span></div>
 <h3>{esc(arm.get('label', name))}</h3><div class="score">{ratio}<small>checks passed</small></div><div class="bars">{bars}</div>
 {category_text}<div class="arm-foot"><span>{usd(arm.get('cost_usd'))}</span><span>{token_label} tokens</span></div><p class="model">{esc(model)}</p>{cap_text}{error}</article>''')
@@ -138,7 +147,7 @@ def write_report(result: dict, output: Path) -> Path:
     if intent.get("provenance"):
         provenance += '<pre>' + esc(json.dumps(intent["provenance"], ensure_ascii=False, indent=2)) + '</pre>'
     if result.get("capsule", {}).get("rebuild"):
-        provenance += '<h3>Independent requirements shared by B/C/D</h3><pre>' + esc(json.dumps(result["capsule"]["rebuild"], ensure_ascii=False, indent=2)) + '</pre>'
+        provenance += '<h3>Independent requirements</h3><pre>' + esc(json.dumps(result["capsule"]["rebuild"], ensure_ascii=False, indent=2)) + '</pre>'
     frozen = result.get("manifest", {})
     frozen_note = (f'<p class="caption">Checks frozen at {esc(frozen.get("checks_frozen_at", "unrecorded"))} · SHA-256 {esc(frozen.get("checks", "unrecorded"))}. Category provenance is available on each label and in the frozen capsule.</p>'
                    if any("category" in check for check in checks) else "")
@@ -146,17 +155,24 @@ def write_report(result: dict, output: Path) -> Path:
     evidence_links = ('<p class="caption"><a href="summary.json">Exported summary JSON</a> · ' + esc(shared["note"]) + '</p>' if shared else
                       '<p class="caption"><a href="result.json">Full result JSON</a> · <a href="capsule.frozen.json">Frozen capsule</a> · Raw call receipts and prompts are in the receipts folder.</p>')
     inspection_title = "Evidence included in this export." if shared else "Nothing hidden behind a score."
+    if imported and not shared:
+        evidence_links = '<p class="caption"><a href="result.json">Full result JSON</a> · <a href="capsule.frozen.json">Frozen capsule</a> · Imported responses are in the responses folder; they are not provider receipts.</p>'
+    cost_detail = "External generation cost" if imported else "Experiment cost"
+    cost_limit = "" if imported else f' <small>/ {usd(cost.get("limit_usd"))} stop budget</small>'
+    cost_note = "" if imported else ". Failed calls count. Provider stops can overshoot by one in-flight response."
+    checks_note = ("Check definitions are omitted from the exported request. External generation context and timing are unverified. "
+                   if imported else "Check definitions are not sent to the model. ")
     html = '''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src data:; style-src 'unsafe-inline'; script-src 'unsafe-inline'; base-uri 'none'; form-action 'none'">
 <title>Second Look · Revisit report</title><style>''' + CSS + '''</style></head><body><main>
-<header><a class="brand" href="#">◉ SECOND LOOK<span>REVISIT / 004</span></a><span class="status-label">''' + ("BASELINE PROBE" if probe_only else "OFFLINE REFERENCE" if offline else "LIVE MODEL EXPERIMENT") + '''</span></header>
+<header><a class="brand" href="#">◉ SECOND LOOK<span>REVISIT / 006</span></a><span class="status-label">''' + ("IMPORTED CANDIDATES" if imported else "BASELINE PROBE" if probe_only else "OFFLINE REFERENCE" if offline else "LIVE MODEL EXPERIMENT") + '''</span></header>
 <section class="hero"><div class="eyebrow">NEW MODEL. OLD WORK. FRESH EVIDENCE.</div><h1>See what actually<br>got better<span class="dot">.</span></h1><p class="project">''' + esc(result.get("capsule", {}).get("title", "Revisit")) + '''</p><p class="caption">Source: ''' + esc(result.get("capsule", {}).get("baseline", {}).get("provenance", "Provenance not recorded")) + '''</p></section>
 <section class="verdict"><div><span class="eyebrow">THE RESULT</span><h2>''' + esc(headline) + '''</h2><p>''' + esc(workflow_note) + '''</p></div><div class="delta">''' + delta_html + '''</div></section>
 <section class="arms">''' + "".join(cards) + '''</section>''' + comparison_panel + '''
-<section class="budget"><div><span class="eyebrow">EXPERIMENT COST</span><h3>''' + usd(cost.get("total_usd")) + ''' <small>/ ''' + usd(cost.get("limit_usd")) + ''' stop budget</small></h3><div class="meter"><i style="width:''' + str(budget_used) + '''%"></i></div></div><div><strong>''' + total_tokens + '''</strong><span>reported tokens, including cache reads/writes</span></div><p>''' + esc(cost.get("basis", "Cost basis unavailable")) + '''. Failed calls count. Provider stops can overshoot by one in-flight response.</p></section>
+<section class="budget"><div><span class="eyebrow">''' + cost_detail.upper() + '''</span><h3>''' + usd(cost.get("total_usd")) + cost_limit + '''</h3><div class="meter"><i style="width:''' + str(budget_used) + '''%"></i></div></div><div><strong>''' + total_tokens + '''</strong><span>reported tokens, including cache reads/writes</span></div><p>''' + esc(cost.get("basis", "Cost basis unavailable") + cost_note) + '''</p></section>
 ''' + context_panel + '''<details class="intent"><summary>Original intent <span>Preserved before the revision</span></summary><p>''' + esc(intent.get("text", "Unrecorded")) + '''</p>''' + provenance + '''</details>
 <section class="section"><div class="section-heading"><div><span class="eyebrow">01 / BEHAVIOR</span><h2>The same checks. Every version.</h2></div><div class="filters" role="group" aria-label="Filter checks"><button class="active" data-filter="all" aria-pressed="true">All</button><button data-filter="changed" aria-pressed="false">Changed</button><button data-filter="holdout" aria-pressed="false">Holdout</button></div></div>
-<div class="table-wrap"><table><thead><tr><th>Frozen acceptance check</th>''' + "".join(f"<th>{esc(k)}</th>" for k in arms) + '''</tr></thead><tbody>''' + "".join(rows) + '''</tbody></table></div>''' + frozen_note + '''<p class="caption">Check definitions are not sent to the model. Holdout cases require inputs unavailable in shared source/data; ordinary visible inputs are not holdouts. Timings include navigation, actions and assertion waits; these are not performance benchmarks. Hover a result for failure details.</p></section>
+<div class="table-wrap"><table><thead><tr><th>Frozen acceptance check</th>''' + "".join(f"<th>{esc(k)}</th>" for k in arms) + '''</tr></thead><tbody>''' + "".join(rows) + '''</tbody></table></div>''' + frozen_note + '''<p class="caption">''' + checks_note + '''Holdout cases require inputs unavailable in shared source/data; ordinary visible inputs are not holdouts. Timings include navigation, actions and assertion waits; these are not performance benchmarks. Hover a result for failure details.</p></section>
 <section class="section"><div class="section-heading"><div><span class="eyebrow">02 / VISIBLE CHANGE</span><h2>Look at the same moment.</h2></div><label class="select-label">Screen state <select id="shot-state">''' + "".join(f'<option value="{esc(state)}">{esc(state)}</option>' for state in shot_states) + '''</select></label></div>''' + ("".join(screenshots) or '<p class="caption">No screenshots captured.</p>') + '''<p class="caption">Same viewport for each corresponding check; 1200 × 820 by default. Per-check dimensions are in the evidence JSON. Click any image to inspect it. Visual differences are evidence, not an automatic quality score.</p></section>
 <section class="section"><span class="eyebrow">03 / INSPECT THE WORK</span><h2>''' + inspection_title + '''</h2>''' + "".join(details) + '''<details><summary>Run identity, costs and comparison evidence</summary><pre>''' + esc(json.dumps(evidence, ensure_ascii=False, indent=2)) + '''</pre></details>''' + evidence_links + '''</section>
 <footer><strong>Second Look</strong><p>One task. One sample per arm. Evidence of checked behavior, not proof of general model superiority.<br>Original artifacts are preserved. Review the patch before adopting a change.</p><span>''' + esc(result.get("created_at", "")) + '''</span></footer>

@@ -13,6 +13,7 @@ import shutil
 from .core import CapsuleError, write_json
 from .provider import COST_BASIS
 from .report import write_report
+from .assessment import IMPORTED_COST_BASIS
 
 
 LABELS = {"A": "Saved artifact", "B": "Ordinary improvement", "C": "Intent-first reframe",
@@ -57,8 +58,10 @@ def share_result(result_path: Path, output: Path, *, title="Second Look comparis
     raw = _object(json.loads(raw_bytes), "result")
     capsule = _object(raw.get("capsule"), "capsule")
     kind = raw.get("kind")
-    if kind not in {"live_model", "offline_reference", "baseline_probe"}:
+    if kind not in {"live_model", "offline_reference", "baseline_probe", "imported_candidates"}:
         raise CapsuleError("Unsupported result kind")
+    imported = kind == "imported_candidates"
+    labels = {"A": "Saved artifact", **{f"E{i}": f"Imported candidate {i}" for i in range(1, 5)}} if imported else LABELS
     checks, mapping = [], {}
     for index, item in enumerate(_list(capsule.get("checks"), "checks"), 1):
         item = _object(item, "check")
@@ -102,23 +105,30 @@ def share_result(result_path: Path, output: Path, *, title="Second Look comparis
     cost = _object(raw.get("cost", {}), "cost")
     public["cost"] = {key: _number(cost.get(key)) for key in ("total_usd", "limit_usd", "known_spend_usd")}
     # A missing known-spend field must not be invented as zero for the renderer.
-    public["cost"]["basis"] = COST_BASIS if kind == "live_model" else "No model was called"
+    public["cost"]["basis"] = IMPORTED_COST_BASIS if imported else COST_BASIS if kind == "live_model" else "No model was called"
     image_bytes = 0
     for name, original in _object(raw.get("arms"), "arms").items():
-        if name not in LABELS:
+        if name not in labels:
             raise CapsuleError("Unsupported workflow in result")
         original = _object(original, "workflow")
         models = _list(original.get("models", []), "models", 10)
         model_ids = [m for m in models if isinstance(m, str) and len(m) < 100 and MODEL.fullmatch(m)]
+        if imported:
+            model_ids = []
         if name == "R" and kind == "offline_reference":
             model_ids = ["none: hand-authored reference"]
         elif name == "A" and not model_ids:
             model_ids = ["unknown"]
-        arm = {"label": LABELS[name], "status": original.get("status") if original.get("status") in STATUSES else "error",
+        arm = {"label": labels[name], "status": original.get("status") if original.get("status") in STATUSES else "error",
                "models": model_ids, "cost_usd": _number(original.get("cost_usd")),
                "tokens": {"total": _number(_object(original.get("tokens", {}), "tokens").get("total"), integer=True)}}
         if "budget_usd" in original:
             arm["budget_usd"] = _number(original["budget_usd"])
+        reused = original.get("evaluation_reused_from")
+        if imported and reused is not None:
+            if reused not in public["arms"]:
+                raise CapsuleError("Reused evaluation must refer to an earlier imported arm")
+            arm["evaluation_reused_from"] = reused
         if "evaluation" in original:
             old_eval = _object(original["evaluation"], "evaluation")
             total = _number(old_eval.get("total"), integer=True)

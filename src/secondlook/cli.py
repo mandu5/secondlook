@@ -20,6 +20,8 @@ from .report import write_report
 from .runner import MODES, probe, run
 from .sessions import read_requests, select_request
 from .sharing import share_result
+from .handoff import MAX_REQUEST_BYTES, prepare_request, read_json
+from .assessment import assess_responses
 from .portfolio_cli import COMMANDS, add_commands, handle
 
 
@@ -50,6 +52,16 @@ def parser() -> argparse.ArgumentParser:
     probe_parser = commands.add_parser("probe", help="Run browser checks only, even with draft intent; no model calls")
     probe_parser.add_argument("capsule", type=Path)
     probe_parser.add_argument("--output", type=Path)
+    prepare = commands.add_parser("prepare", help="Freeze a task and export a request for your existing AI tool; no model calls")
+    prepare.add_argument("capsule", type=Path)
+    prepare.add_argument("--mode", choices=("ordinary", "rebuild"), default="rebuild")
+    prepare.add_argument("--output", type=Path, required=True)
+    assess = commands.add_parser("assess", help="Compare imported responses locally against frozen checks; no model calls")
+    assess.add_argument("request", type=Path, help="Directory written by prepare")
+    assess.add_argument("--response", type=Path, action="append", required=True, help="Response JSON; repeat for up to four candidates")
+    assess.add_argument("--label", action="append", required=True, help="Owner-reported model/tool label; one per response, in the same order")
+    assess.add_argument("--usage", type=Path, help="Optional same-order JSON array of owner-reported cost/token records; unknown by default")
+    assess.add_argument("--output", type=Path, required=True)
     init = commands.add_parser("init", help="Capture original intent and a source allowlist")
     init.add_argument("root", type=Path)
     init.add_argument("--intent", required=True)
@@ -122,6 +134,17 @@ def main(argv: list[str] | None = None) -> int:
             print(json.dumps({"capsule": str(path), "intent_confirmed": args.confirm_intent, "model_calls": 0}, indent=2))
         elif args.command == "inspect":
             print(json.dumps(inspect_artifact(args.capsule), ensure_ascii=False, indent=2))
+        elif args.command == "prepare":
+            result = prepare_request(args.capsule, args.output, mode=args.mode)
+            print(json.dumps({"request_id": result["request_id"], "request": str(args.output.resolve() / "request.md"),
+                              "mode": args.mode, "model_calls": 0, "note": result["note"]}, ensure_ascii=False, indent=2))
+        elif args.command == "assess":
+            usage = read_json(args.usage, MAX_REQUEST_BYTES) if args.usage else None
+            result = assess_responses(args.request, args.response, args.label, args.output, usage=usage)
+            report_path = write_report(result, args.output.resolve())
+            print(json.dumps({"status": result["status"], "report": str(report_path), "model_calls": 0,
+                              "cost": result["cost"], "comparisons": result["comparisons"]}, ensure_ascii=False, indent=2))
+            return 0 if result["status"] == "completed" else 1
         elif args.command == "probe":
             stamp = datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S-%f")
             output = (args.output or Path(".secondlook") / (stamp + "-probe")).resolve()

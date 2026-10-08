@@ -1,0 +1,23 @@
+name: Bug report
+description: Report a reproducible failure without private source or receipts.
+body:
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Expected and observed behavior
+      description: What should happen, and what actually happened?
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal reproduction
+      description: Include commands and a small synthetic input. Do not attach private prompts, source or raw receipts.
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Second Look version, Python, OS
+    validations:
+      required: true

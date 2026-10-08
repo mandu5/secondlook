@@ -1,0 +1,15 @@
+{
+  "summary": "Hand-authored reference repair for offline harness validation. No model call.",
+  "edits": [
+    {
+      "path": "index.html",
+      "old": "  const query = search.value;\n  return rows.filter(row => (priority.value === 'all' || row.priority === priority.value) && (row.title.includes(query) || row.tag.includes(query)));",
+      "new": "  const query = search.value.trim().toLowerCase();\n  return rows.filter(row => (priority.value === 'all' || row.priority === priority.value) && (row.title.toLowerCase().includes(query) || row.tag.toLowerCase().includes(query)));"
+    },
+    {
+      "path": "index.html",
+      "old": "  const csv = ['id,title,priority,tag', ...rows.map(row => [row.id, row.title, row.priority, row.tag].join(','))].join('\\n');",
+      "new": "  const cell = value => '\"' + String(value).replaceAll('\"', '\"\"') + '\"';\n  const csv = [['id', 'title', 'priority', 'tag'], ...visibleRows().map(row => [row.id, row.title, row.priority, row.tag])].map(row => row.map(cell).join(',')).join('\\r\\n');"
+    }
+  ]
+}

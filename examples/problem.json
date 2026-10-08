@@ -1,0 +1,14 @@
+{
+  "id": "research-note",
+  "title": "Recheck a disputed research finding",
+  "kind": "research",
+  "intent": {
+    "text": "Determine whether the finding holds across independent datasets, using primary sources.",
+    "source": "Example owner request; replace with your original request and provenance",
+    "confirmed": false
+  },
+  "constraints": ["Preserve negative evidence and uncertainty"],
+  "failures": ["Previous answer did not establish cross-dataset validity"],
+  "assumptions": [{"text": "One benchmark generalizes", "source": "Previous draft hypothesis"}],
+  "revisit": {"capabilities": ["research", "long-context"], "impact": 4, "estimated_usd": 0.5}
+}

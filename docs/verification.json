@@ -1,0 +1,109 @@
+{
+  "date": "2026-10-07",
+  "version": "0.2.0",
+  "tests": {
+    "passed": 107,
+    "failed": 0,
+    "seconds": 41.43,
+    "command": ".venv/bin/python -m pytest -q"
+  },
+  "prior_v0_1": {
+    "date": "2026-10-07",
+    "version": "0.1.0",
+    "tests": {
+      "passed": 55,
+      "failed": 0,
+      "command": ".venv/bin/python -m pytest -q"
+    },
+    "live_demo": {
+      "fixture": "synthetic_feedback",
+      "provider_cli": "Claude Code 2.1.289",
+      "requested_model": "sonnet",
+      "resolved_model": "claude-sonnet-5-5",
+      "passed": {
+        "A": 3,
+        "B": 8,
+        "C": 8
+      },
+      "total_checks": 8,
+      "api_equivalent_usd": 0.0564776,
+      "tokens_including_cache": 12078,
+      "workflow_verdict": "no_measured_gain",
+      "source_unchanged": true
+    },
+    "independent_review": {
+      "critical": 0,
+      "important_fixed": 4,
+      "minor_deferred": "two extra EOF blank lines",
+      "followup_review": false
+    },
+    "post_review_artifact_recheck": {
+      "passed": {
+        "A": 3,
+        "B": 8,
+        "C": 8
+      },
+      "additional_model_calls": 0
+    },
+    "distribution": {
+      "wheel_build": "passed",
+      "clean_env_offline_demo": "passed",
+      "public_publish": false
+    },
+    "ui": {
+      "viewports": [
+        1440,
+        390
+      ],
+      "body_overflow": false,
+      "page_errors": 0,
+      "filters_and_lightbox": "passed",
+      "demo_video_seconds": 17.96
+    }
+  },
+  "real_case": "real-case.json",
+  "independent_review": {
+    "status": "findings fixed and regression-tested by author",
+    "critical": 0,
+    "important_fixed": 4,
+    "reviewer_original_grades": {
+      "important": 3,
+      "minor": 1
+    },
+    "minor_regraded": "Malformed records could block valid request import",
+    "minor_deferred": 0,
+    "second_review": false,
+    "record": "review-v0.2.md"
+  },
+  "distribution": {
+    "wheel_build": "passed",
+    "clean_env_import": "passed",
+    "clean_env_offline_demo": "passed: A=3/8, reference=8/8, zero model calls",
+    "public_publish": false,
+    "final_wheel_rebuild": "passed",
+    "final_clean_env_offline_demo": "passed: A=3/8, reference=8/8, zero model calls",
+    "privacy_scan": {
+      "public_files_checked": 44,
+      "private_markers_found": 0,
+      "wheel_private_markers_found": 0,
+      "scope": "Exact selected private request, local account path, private artifact filename, private-key headers and ignored output directories; not a universal secret detector."
+    }
+  },
+  "ui": {
+    "status": "passed",
+    "viewports": [
+      1440,
+      390
+    ],
+    "body_overflow": false,
+    "page_errors": 0,
+    "filters_lightbox_states": "passed"
+  },
+  "post_review_integrity": {
+    "saved_edits_reapplied": true,
+    "candidate_bytes_match_live_outputs": true,
+    "original_source_unchanged": true,
+    "selected_human_record_revalidated": true,
+    "extra_model_calls": 0
+  }
+}

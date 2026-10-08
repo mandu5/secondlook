@@ -1,0 +1,218 @@
+{
+  "version": 1,
+  "id": "feedback-demo",
+  "title": "Feedback inbox: search and export",
+  "intent": {
+    "text": "Let a product team search feedback titles or tags without caring about case or surrounding whitespace, combine search with priority filters, and export exactly the visible items as valid CSV that preserves the original fields. Counts and reset must remain truthful.",
+    "source": "Authored synthetic product brief, 2026-10-07",
+    "confirmed": true
+  },
+  "root": ".",
+  "files": [
+    "index.html"
+  ],
+  "entrypoint": "index.html",
+  "baseline": {
+    "model": "unknown",
+    "provenance": "Deliberately flawed synthetic fixture; not produced by a historical model"
+  },
+  "constraints": [
+    "Keep the existing offline static app, data, input IDs and useful behavior.",
+    "No libraries, external network calls or build step.",
+    "Preserve the CSV column order: id,title,priority,tag."
+  ],
+  "assumptions": [
+    {
+      "text": "Export can use the full underlying dataset.",
+      "source": "legacy implementation",
+      "confirmed": false
+    }
+  ],
+  "failures": [
+    "Searching for lowercase csv hides a matching uppercase title.",
+    "Exported data differs from the filtered view; quoted/multiline titles are corrupted."
+  ],
+  "revisit": {
+    "capabilities": [
+      "coding",
+      "reasoning"
+    ],
+    "impact": 4,
+    "estimated_usd": 2.0
+  },
+  "checks": [
+    {
+      "id": "initial",
+      "name": "All six feedback items render",
+      "actions": [],
+      "assert": {
+        "selector": ".card",
+        "count": 6
+      }
+    },
+    {
+      "id": "priority",
+      "name": "Priority filter keeps the two P1 items",
+      "actions": [
+        {
+          "type": "select",
+          "selector": "#priority",
+          "value": "P1"
+        }
+      ],
+      "assert": {
+        "selector": ".card",
+        "count": 2
+      }
+    },
+    {
+      "id": "search",
+      "name": "Lowercase search finds uppercase CSV title",
+      "actions": [
+        {
+          "type": "fill",
+          "selector": "#search",
+          "value": "csv"
+        }
+      ],
+      "assert": {
+        "selector": ".card h2",
+        "text": "CSV export includes hidden items"
+      },
+      "capture": true
+    },
+    {
+      "id": "export",
+      "name": "CSV contains exactly the filtered visible item",
+      "actions": [
+        {
+          "type": "fill",
+          "selector": "#search",
+          "value": "Keyboard"
+        },
+        {
+          "type": "download",
+          "selector": "#export"
+        }
+      ],
+      "assert": {
+        "csv": [
+          [
+            "id",
+            "title",
+            "priority",
+            "tag"
+          ],
+          [
+            "F-104",
+            "Keyboard shortcut for search",
+            "P2",
+            "accessibility"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "quoting",
+      "name": "CSV preserves commas, quotes and multiline titles",
+      "actions": [
+        {
+          "type": "fill",
+          "selector": "#search",
+          "value": "Billing"
+        },
+        {
+          "type": "download",
+          "selector": "#export"
+        }
+      ],
+      "assert": {
+        "csv": [
+          [
+            "id",
+            "title",
+            "priority",
+            "tag"
+          ],
+          [
+            "F-105",
+            "Billing, \"team\" plan\nneeds invoice",
+            "P1",
+            "payments"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "whitespace",
+      "name": "Mixed case and surrounding whitespace work together",
+      "held_out": true,
+      "actions": [
+        {
+          "type": "fill",
+          "selector": "#search",
+          "value": "  bIlLiNg  "
+        },
+        {
+          "type": "select",
+          "selector": "#priority",
+          "value": "P1"
+        }
+      ],
+      "assert": {
+        "selector": ".card",
+        "count": 1
+      }
+    },
+    {
+      "id": "reset",
+      "name": "Reset restores the whole inbox",
+      "actions": [
+        {
+          "type": "fill",
+          "selector": "#search",
+          "value": "Keyboard"
+        },
+        {
+          "type": "select",
+          "selector": "#priority",
+          "value": "P1"
+        },
+        {
+          "type": "click",
+          "selector": "#reset"
+        }
+      ],
+      "assert": {
+        "selector": "#count",
+        "text": "6 of 6 items"
+      }
+    },
+    {
+      "id": "empty-export",
+      "name": "Empty result exports only the CSV header",
+      "held_out": true,
+      "actions": [
+        {
+          "type": "fill",
+          "selector": "#search",
+          "value": "does-not-exist"
+        },
+        {
+          "type": "download",
+          "selector": "#export"
+        }
+      ],
+      "assert": {
+        "csv": [
+          [
+            "id",
+            "title",
+            "priority",
+            "tag"
+          ]
+        ]
+      }
+    }
+  ]
+}

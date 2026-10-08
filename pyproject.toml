@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "secondlook-revisit"
+version = "0.5.0"
+description = "Revisit AI-built work with original intent, bounded experiments, and evidence."
+requires-python = ">=3.11"
+license = "MIT"
+license-files = ["LICENSE"]
+readme = "README.md"
+dependencies = ["playwright>=1.51,<2", "certifi>=2024.8.30"]
+keywords = ["llm", "evaluation", "ai", "revisit", "model-upgrade"]
+classifiers = ["Development Status :: 4 - Beta", "Programming Language :: Python :: 3",
+               "Operating System :: MacOS", "Operating System :: POSIX :: Linux"]
+
+[project.urls]
+Homepage = "https://mandu5.github.io/secondlook/"
+Repository = "https://github.com/mandu5/secondlook"
+Issues = "https://github.com/mandu5/secondlook/issues"
+Documentation = "https://github.com/mandu5/secondlook/blob/main/docs/quickstart.md"
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10"]
+
+[project.scripts]
+secondlook = "secondlook.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+secondlook = ["demo/*"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

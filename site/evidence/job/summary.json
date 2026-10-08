@@ -1,0 +1,401 @@
+{
+  "version": 1,
+  "kind": "live_model",
+  "status": "completed",
+  "capsule": {
+    "title": "Job Radar — frozen input-isolated trial",
+    "checks": [
+      {
+        "id": "check-1",
+        "name": "Check 1",
+        "category": "intent",
+        "basis": "Acceptance definition excluded from this export",
+        "held_out": true
+      },
+      {
+        "id": "check-2",
+        "name": "Check 2",
+        "category": "intent",
+        "basis": "Acceptance definition excluded from this export",
+        "held_out": true
+      },
+      {
+        "id": "check-3",
+        "name": "Check 3",
+        "category": "intent",
+        "basis": "Acceptance definition excluded from this export",
+        "held_out": true
+      },
+      {
+        "id": "check-4",
+        "name": "Check 4",
+        "category": "preservation",
+        "basis": "Acceptance definition excluded from this export",
+        "held_out": true
+      },
+      {
+        "id": "check-5",
+        "name": "Check 5",
+        "category": "preservation",
+        "basis": "Acceptance definition excluded from this export",
+        "held_out": true
+      },
+      {
+        "id": "check-6",
+        "name": "Check 6",
+        "category": "preservation",
+        "basis": "Acceptance definition excluded from this export",
+        "held_out": true
+      },
+      {
+        "id": "check-7",
+        "name": "Check 7",
+        "category": "preservation",
+        "basis": "Acceptance definition excluded from this export",
+        "held_out": true
+      },
+      {
+        "id": "check-8",
+        "name": "Check 8",
+        "category": "preservation",
+        "basis": "Acceptance definition excluded from this export"
+      },
+      {
+        "id": "check-9",
+        "name": "Check 9",
+        "category": "preservation",
+        "basis": "Acceptance definition excluded from this export"
+      }
+    ],
+    "intent": {
+      "text": "Intent text was not included in this export."
+    },
+    "baseline": {
+      "provenance": "Historical model authorship is unverified; source provenance excluded from this summary."
+    }
+  },
+  "arms": {
+    "A": {
+      "label": "Saved artifact",
+      "status": "completed",
+      "models": [
+        "unknown"
+      ],
+      "cost_usd": 0,
+      "tokens": {
+        "total": 0
+      },
+      "evaluation": {
+        "status": "completed",
+        "passed": 6,
+        "total": 9,
+        "checks": [
+          {
+            "id": "check-1",
+            "passed": false,
+            "error_kind": "behavior"
+          },
+          {
+            "id": "check-2",
+            "passed": false,
+            "error_kind": "behavior"
+          },
+          {
+            "id": "check-3",
+            "passed": false,
+            "error_kind": "behavior"
+          },
+          {
+            "id": "check-4",
+            "passed": true,
+            "error_kind": "behavior"
+          },
+          {
+            "id": "check-5",
+            "passed": true,
+            "error_kind": "behavior"
+          },
+          {
+            "id": "check-6",
+            "passed": true,
+            "error_kind": "behavior"
+          },
+          {
+            "id": "check-7",
+            "passed": true,
+            "error_kind": "behavior"
+          },
+          {
+            "id": "check-8",
+            "passed": true,
+            "error_kind": "behavior"
+          },
+          {
+            "id": "check-9",
+            "passed": true,
+            "error_kind": "behavior"
+          }
+        ],
+        "screenshots": {}
+      }
+    },
+    "B": {
+      "label": "Ordinary improvement",
+      "status": "completed",
+      "models": [
+        "claude-sonnet-5-5"
+      ],
+      "cost_usd": 0.0414374,
+      "tokens": {
+        "total": 8642
+      },
+      "budget_usd": 0.3333333333333333,
+      "evaluation": {
+        "status": "completed",
+        "passed": 9,
+        "total": 9,
+        "checks": [
+          {
+            "id": "check-1",
+            "passed": true,
+            "error_kind": "behavior"
+          },
+          {
+            "id": "check-2",
+            "passed": true,
+            "error_kind": "behavior"
+          },
+          {
+            "id": "check-3",
+            "passed": true,
+            "error_kind": "behavior"
+          },
+          {
+            "id": "check-4",
+            "passed": true,
+            "error_kind": "behavior"
+          },
+          {
+            "id": "check-5",
+            "passed": true,
+            "error_kind": "behavior"
+          },
+          {
+            "id": "check-6",
+            "passed": true,
+            "error_kind": "behavior"
+          },
+          {
+            "id": "check-7",
+            "passed": true,
+            "error_kind": "behavior"
+          },
+          {
+            "id": "check-8",
+            "passed": true,
+            "error_kind": "behavior"
+          },
+          {
+            "id": "check-9",
+            "passed": true,
+            "error_kind": "behavior"
+          }
+        ],
+        "screenshots": {}
+      }
+    },
+    "C": {
+      "label": "Intent-first reframe",
+      "status": "completed",
+      "models": [
+        "claude-sonnet-5-5"
+      ],
+      "cost_usd": 0.07513720000000002,
+      "tokens": {
+        "total": 14298
+      },
+      "budget_usd": 0.3333333333333333,
+      "evaluation": {
+        "status": "completed",
+        "passed": 9,
+        "total": 9,
+        "checks": [
+          {
+            "id": "check-1",
+            "passed": true,
+            "error_kind": "behavior"
+          },
+          {
+            "id": "check-2",
+            "passed": true,
+            "error_kind": "behavior"
+          },
+          {
+            "id": "check-3",
+            "passed": true,
+            "error_kind": "behavior"
+          },
+          {
+            "id": "check-4",
+            "passed": true,
+            "error_kind": "behavior"
+          },
+          {
+            "id": "check-5",
+            "passed": true,
+            "error_kind": "behavior"
+          },
+          {
+            "id": "check-6",
+            "passed": true,
+            "error_kind": "behavior"
+          },
+          {
+            "id": "check-7",
+            "passed": true,
+            "error_kind": "behavior"
+          },
+          {
+            "id": "check-8",
+            "passed": true,
+            "error_kind": "behavior"
+          },
+          {
+            "id": "check-9",
+            "passed": true,
+            "error_kind": "behavior"
+          }
+        ],
+        "screenshots": {}
+      }
+    },
+    "D": {
+      "label": "Clean-slate rebuild",
+      "status": "completed",
+      "models": [
+        "claude-sonnet-5-5"
+      ],
+      "cost_usd": 0.034864,
+      "tokens": {
+        "total": 5274
+      },
+      "budget_usd": 0.3333333333333333,
+      "evaluation": {
+        "status": "completed",
+        "passed": 9,
+        "total": 9,
+        "checks": [
+          {
+            "id": "check-1",
+            "passed": true,
+            "error_kind": "behavior"
+          },
+          {
+            "id": "check-2",
+            "passed": true,
+            "error_kind": "behavior"
+          },
+          {
+            "id": "check-3",
+            "passed": true,
+            "error_kind": "behavior"
+          },
+          {
+            "id": "check-4",
+            "passed": true,
+            "error_kind": "behavior"
+          },
+          {
+            "id": "check-5",
+            "passed": true,
+            "error_kind": "behavior"
+          },
+          {
+            "id": "check-6",
+            "passed": true,
+            "error_kind": "behavior"
+          },
+          {
+            "id": "check-7",
+            "passed": true,
+            "error_kind": "behavior"
+          },
+          {
+            "id": "check-8",
+            "passed": true,
+            "error_kind": "behavior"
+          },
+          {
+            "id": "check-9",
+            "passed": true,
+            "error_kind": "behavior"
+          }
+        ],
+        "screenshots": {}
+      }
+    }
+  },
+  "comparisons": {
+    "A_B": {
+      "verdict": "improved",
+      "improvements": [
+        "check-1",
+        "check-2",
+        "check-3"
+      ],
+      "regressions": []
+    },
+    "A_C": {
+      "verdict": "improved",
+      "improvements": [
+        "check-1",
+        "check-2",
+        "check-3"
+      ],
+      "regressions": []
+    },
+    "A_D": {
+      "verdict": "improved",
+      "improvements": [
+        "check-1",
+        "check-2",
+        "check-3"
+      ],
+      "regressions": []
+    },
+    "B_C": {
+      "verdict": "no_measured_gain",
+      "improvements": [],
+      "regressions": []
+    },
+    "B_D": {
+      "verdict": "no_measured_gain",
+      "improvements": [],
+      "regressions": []
+    },
+    "C_D": {
+      "verdict": "no_measured_gain",
+      "improvements": [],
+      "regressions": []
+    }
+  },
+  "manifest": {
+    "input_result_sha256": "f582d48796b2f91a4a8ee74144b7f51d89df3c2eae7d85467c5d6d0e0db30680",
+    "source": "1f634cfabb3add1def3795369f041c622c091974e9cd5c0eb7c53526ce4995b1",
+    "checks": "673403f661e5caba6125eb17029e6561ad86df1a623ce34e235514d334c0e23f"
+  },
+  "model_calls": 4,
+  "sharing": {
+    "metrics_only": true,
+    "intent_included": false,
+    "screenshots_included": false,
+    "note": "Source, raw prompts/receipts, check definitions, private labels and paths are excluded. Metrics are reported from the input result; this export is not independent verification."
+  },
+  "source_unchanged": true,
+  "cost": {
+    "total_usd": 0.1514386,
+    "limit_usd": 1.0,
+    "known_spend_usd": 0.1514386,
+    "basis": "Claude CLI reported API-equivalent USD; not a subscription invoice"
+  }
+}

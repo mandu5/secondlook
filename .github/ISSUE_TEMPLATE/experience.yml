@@ -1,0 +1,22 @@
+name: Revisit experience
+description: Tell us what you adopted, rejected, or found too hard to prepare.
+body:
+  - type: textarea
+    id: task
+    attributes:
+      label: What problem did you revisit?
+      description: Include the original purpose and why the previous work was insufficient. Avoid private details.
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: What did you adopt or reject, and why?
+      description: Unchanged results, failures and regressions are useful too. A reviewed share summary is optional.
+    validations:
+      required: true
+  - type: textarea
+    id: friction
+    attributes:
+      label: Setup effort and reuse
+      description: Roughly how long did preparation take? Would you use it on a second task?

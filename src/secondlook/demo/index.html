@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Pulse / feedback inbox</title>
+<style>
+:root{font:15px/1.5 system-ui,sans-serif;color:#193034;background:#eff3f1}*{box-sizing:border-box}body{margin:0}main{max-width:1080px;margin:auto;padding:42px 28px}.brand{font-size:13px;letter-spacing:.15em;font-weight:750;color:#57706a}.top{display:flex;justify-content:space-between;align-items:center;gap:20px}h1{font-size:36px;letter-spacing:-1.4px;margin:12px 0 4px}p{color:#627770;margin:0}.pill{background:#dfe9e3;border:1px solid #c9d8ce;border-radius:30px;padding:6px 12px;font-size:12px;white-space:nowrap}.toolbar{margin:30px 0 20px;display:flex;gap:10px;flex-wrap:wrap}input,select,button{font:inherit;border:1px solid #c6d1ca;border-radius:9px;padding:11px 14px;background:#fff;color:#193034}input{flex:1;min-width:170px}button{cursor:pointer}button.primary{background:#1e5446;color:#fff;border-color:#1e5446}.summary{display:flex;align-items:center;justify-content:space-between;font-size:13px;margin-bottom:12px}.cards{display:grid;grid-template-columns:1fr 1fr;gap:12px}.card{padding:20px;border:1px solid #d7e0da;border-radius:12px;background:#fff;min-height:134px}.card h2{font-size:17px;line-height:1.4;margin:10px 0;white-space:pre-wrap;overflow-wrap:anywhere}.meta{display:flex;justify-content:space-between;gap:12px;font-size:12px;color:#627770}.priority{font-weight:750;color:#835237}.tag{font-size:12px;color:#557166;background:#f1f5f2;border-radius:5px;padding:3px 7px}.empty{grid-column:1/-1;border:1px dashed #b8c9bd;padding:48px;text-align:center;border-radius:12px}footer{margin-top:28px;color:#72857b;font-size:12px}@media(max-width:640px){main{padding:26px 18px}h1{font-size:30px}.cards{grid-template-columns:1fr}.top{align-items:flex-start}.top .pill{display:none}.toolbar>*{flex-grow:1}}
+</style></head><body><main>
+<div class="brand">PULSE / TEAM WORKSPACE</div><div class="top"><div><h1>Feedback, in focus.</h1><p>A small inbox for the things worth fixing.</p></div><span class="pill">Product · October</span></div>
+<div class="toolbar"><input id="search" aria-label="Search feedback" placeholder="Search titles or tags…"><select id="priority" aria-label="Priority"><option value="all">All priorities</option><option value="P1">P1 · High</option><option value="P2">P2 · Normal</option><option value="P3">P3 · Later</option></select><button id="reset">Reset</button><button class="primary" id="export">Export visible CSV</button></div>
+<div class="summary"><strong id="count"></strong><span>Newest first</span></div><section id="cards" class="cards" aria-live="polite"></section><footer>Synthetic feedback · Second Look public example · No customer data</footer>
+</main><script>
+const rows = [
+  {id: 'F-106', title: 'CSV export includes hidden items', priority: 'P1', tag: 'data'},
+  {id: 'F-105', title: 'Billing, "team" plan\nneeds invoice', priority: 'P1', tag: 'payments'},
+  {id: 'F-104', title: 'Keyboard shortcut for search', priority: 'P2', tag: 'accessibility'},
+  {id: 'F-103', title: 'Dark mode after sunset', priority: 'P3', tag: 'appearance'},
+  {id: 'F-102', title: 'Faster activity feed', priority: 'P2', tag: 'performance'},
+  {id: 'F-101', title: 'Welcome guide for new members', priority: 'P3', tag: 'onboarding'}
+];
+const search = document.querySelector('#search');
+const priority = document.querySelector('#priority');
+function visibleRows() {
+  const query = search.value;
+  return rows.filter(row => (priority.value === 'all' || row.priority === priority.value) && (row.title.includes(query) || row.tag.includes(query)));
+}
+function render() {
+  const visible = visibleRows();
+  document.querySelector('#count').textContent = `${visible.length} of ${rows.length} items`;
+  const cards = document.querySelector('#cards');
+  cards.replaceChildren();
+  for (const row of visible) {
+    const article = document.createElement('article'); article.className = 'card';
+    const meta = document.createElement('div'); meta.className = 'meta';
+    const id = document.createElement('span'); id.textContent = row.id;
+    const badge = document.createElement('span'); badge.className = 'priority'; badge.textContent = row.priority;
+    meta.append(id, badge);
+    const title = document.createElement('h2'); title.textContent = row.title;
+    const tag = document.createElement('span'); tag.className = 'tag'; tag.textContent = row.tag;
+    article.append(meta, title, tag); cards.append(article);
+  }
+  if (!visible.length) { const empty = document.createElement('p'); empty.className = 'empty'; empty.textContent = 'No feedback matches your filters.'; cards.append(empty); }
+}
+function exportCSV() {
+  const csv = ['id,title,priority,tag', ...rows.map(row => [row.id, row.title, row.priority, row.tag].join(','))].join('\n');
+  const url = URL.createObjectURL(new Blob([csv], {type: 'text/csv;charset=utf-8'}));
+  const link = document.createElement('a'); link.href = url; link.download = 'feedback.csv'; link.click();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+search.addEventListener('input', render); priority.addEventListener('change', render);
+document.querySelector('#reset').addEventListener('click', () => {search.value = ''; priority.value = 'all'; render();});
+document.querySelector('#export').addEventListener('click', exportCSV);
+render();
+</script></body></html>

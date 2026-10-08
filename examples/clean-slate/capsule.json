@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "id": "clean-slate-greeting",
+  "title": "Clean-slate mechanics: synthetic greeting example",
+  "root": "source",
+  "entrypoint": "index.html",
+  "files": ["index.html", "facts.json"],
+  "readonly_files": ["facts.json"],
+  "intent": {
+    "text": "Show the greeting in facts.json and provide an accessible Docs link to the documented URL.",
+    "source": "Hand-authored public example, not a historical user failure",
+    "confirmed": true
+  },
+  "rebuild": {
+    "brief": "A static greeting page. Display the greeting from the supplied facts.json as a visible heading. Keep a visible link named Docs pointing to documentation_url. Layout and DOM structure are your choice; facts.json is read-only. No remote dependencies.",
+    "source": "Independent example requirements, written before any candidate generation",
+    "confirmed": true
+  },
+  "baseline": {"model": "unknown", "provenance": "Deliberately incomplete hand-authored synthetic example"},
+  "constraints": ["Static HTML/JS/CSS only; preserve the factual input and documented navigation"],
+  "failures": ["The heading shows a placeholder instead of the supplied greeting"],
+  "assumptions": [],
+  "revisit": {"capabilities": ["coding"], "impact": 1, "estimated_usd": 1},
+  "checks": [
+    {"id": "greeting", "category": "intent", "basis": "Independent greeting requirement",
+      "assert": {"selector": "role=heading[name=\"Hello\"]", "visible": true}, "capture": true},
+    {"id": "docs-link", "category": "preservation", "basis": "Independent navigation requirement, present in the saved artifact",
+      "assert": {"selector": "role=link[name=\"Docs\"]", "visible": true,
+        "attribute": {"name": "href", "value": "https://example.org/docs"}}}
+  ]
+}

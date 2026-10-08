@@ -1,0 +1,308 @@
+{
+  "version": "0.4.0",
+  "measured_at": "2026-10-08T05:53:44.945878+00:00",
+  "model": "claude-sonnet-5-5",
+  "historical_model": "unknown",
+  "mode": "compare-three",
+  "case_scope": "Two agent-selected improvements grounded in existing project documents; one already-satisfied control. Job inputs synthetic.",
+  "interpretable_frozen_trials": {
+    "model_calls": 8,
+    "tokens": 46812,
+    "api_equivalent_usd": 0.2544832
+  },
+  "all_provider_verification": {
+    "model_calls": 12,
+    "tokens": 77088,
+    "api_equivalent_usd": 0.4133206,
+    "includes": "Both initial and corrected trials, including criteria-confounded job trial. Excludes chat/reviewer inference; not subscription billing."
+  },
+  "checks": {
+    "original_sources_unchanged": true,
+    "complete_receipts": 12,
+    "actual_model_identity_verified": true,
+    "D_prompt_has_no_legacy_writable_source": true,
+    "readonly_inputs_unchanged": true,
+    "checks_frozen_before_dispatch": true,
+    "equal_effective_workflow_caps": true,
+    "repeat_plans_selected_zero": true
+  },
+  "cases": [
+    {
+      "id": "job-deadlines",
+      "status": "completed",
+      "arms": {
+        "A": {
+          "passed": 6,
+          "total": 9,
+          "cost_usd": 0,
+          "tokens": 0,
+          "categories": {
+            "intent": {
+              "passed": 0,
+              "failed": 3,
+              "unmeasured": 0,
+              "total": 3
+            },
+            "preservation": {
+              "passed": 6,
+              "failed": 0,
+              "unmeasured": 0,
+              "total": 6
+            }
+          }
+        },
+        "B": {
+          "passed": 9,
+          "total": 9,
+          "cost_usd": 0.0414374,
+          "tokens": 8642,
+          "categories": {
+            "intent": {
+              "passed": 3,
+              "failed": 0,
+              "unmeasured": 0,
+              "total": 3
+            },
+            "preservation": {
+              "passed": 6,
+              "failed": 0,
+              "unmeasured": 0,
+              "total": 6
+            }
+          }
+        },
+        "C": {
+          "passed": 9,
+          "total": 9,
+          "cost_usd": 0.0751372,
+          "tokens": 14298,
+          "categories": {
+            "intent": {
+              "passed": 3,
+              "failed": 0,
+              "unmeasured": 0,
+              "total": 3
+            },
+            "preservation": {
+              "passed": 6,
+              "failed": 0,
+              "unmeasured": 0,
+              "total": 6
+            }
+          }
+        },
+        "D": {
+          "passed": 9,
+          "total": 9,
+          "cost_usd": 0.034864,
+          "tokens": 5274,
+          "categories": {
+            "intent": {
+              "passed": 3,
+              "failed": 0,
+              "unmeasured": 0,
+              "total": 3
+            },
+            "preservation": {
+              "passed": 6,
+              "failed": 0,
+              "unmeasured": 0,
+              "total": 6
+            }
+          }
+        }
+      },
+      "comparisons": {
+        "A_B": "improved",
+        "A_C": "improved",
+        "A_D": "improved",
+        "B_C": "no_measured_gain",
+        "B_D": "no_measured_gain",
+        "C_D": "no_measured_gain"
+      }
+    },
+    {
+      "id": "ugv-demo-disclosure",
+      "status": "completed",
+      "arms": {
+        "A": {
+          "passed": 3,
+          "total": 7,
+          "cost_usd": 0,
+          "tokens": 0,
+          "categories": {
+            "intent": {
+              "passed": 0,
+              "failed": 4,
+              "unmeasured": 0,
+              "total": 4
+            },
+            "preservation": {
+              "passed": 3,
+              "failed": 0,
+              "unmeasured": 0,
+              "total": 3
+            }
+          }
+        },
+        "B": {
+          "passed": 7,
+          "total": 7,
+          "cost_usd": 0.0191834,
+          "tokens": 4214,
+          "categories": {
+            "intent": {
+              "passed": 4,
+              "failed": 0,
+              "unmeasured": 0,
+              "total": 4
+            },
+            "preservation": {
+              "passed": 3,
+              "failed": 0,
+              "unmeasured": 0,
+              "total": 3
+            }
+          }
+        },
+        "C": {
+          "passed": 7,
+          "total": 7,
+          "cost_usd": 0.0506852,
+          "tokens": 9526,
+          "categories": {
+            "intent": {
+              "passed": 4,
+              "failed": 0,
+              "unmeasured": 0,
+              "total": 4
+            },
+            "preservation": {
+              "passed": 3,
+              "failed": 0,
+              "unmeasured": 0,
+              "total": 3
+            }
+          }
+        },
+        "D": {
+          "passed": 7,
+          "total": 7,
+          "cost_usd": 0.033176,
+          "tokens": 4858,
+          "categories": {
+            "intent": {
+              "passed": 4,
+              "failed": 0,
+              "unmeasured": 0,
+              "total": 4
+            },
+            "preservation": {
+              "passed": 3,
+              "failed": 0,
+              "unmeasured": 0,
+              "total": 3
+            }
+          }
+        }
+      },
+      "comparisons": {
+        "A_B": "improved",
+        "A_C": "improved",
+        "A_D": "improved",
+        "B_C": "no_measured_gain",
+        "B_D": "no_measured_gain",
+        "C_D": "no_measured_gain"
+      }
+    },
+    {
+      "id": "tsad-negative-control",
+      "status": "skipped_baseline_passes",
+      "arms": {
+        "A": {
+          "passed": 5,
+          "total": 5,
+          "cost_usd": 0,
+          "tokens": 0,
+          "categories": {
+            "intent": {
+              "passed": 3,
+              "failed": 0,
+              "unmeasured": 0,
+              "total": 3
+            },
+            "preservation": {
+              "passed": 2,
+              "failed": 0,
+              "unmeasured": 0,
+              "total": 2
+            }
+          }
+        }
+      },
+      "comparisons": {}
+    }
+  ],
+  "criteria_review": {
+    "initial_job_raw_scores": {
+      "A": "4/7",
+      "B": "7/7",
+      "C": "7/7",
+      "D": "3/7"
+    },
+    "status": "criteria_confounded; excluded from performance interpretation",
+    "reason": "Four selectors required date text inside the link. D correctly rendered it beside the link in the same card.",
+    "posthoc_recheck_existing_candidates": {
+      "B": "9/9",
+      "C": "9/9",
+      "D": "9/9"
+    },
+    "posthoc_new_model_calls": 0,
+    "resolution": "Separate new model trial after freezing one opportunity per check input. Its scores are reported in cases."
+  },
+  "limitations": [
+    "One sample per workflow per valid case; fixed B/C/D order.",
+    "Keyword/link/browser checks have finite coverage; human adoption and aesthetic quality remain unmeasured.",
+    "Case scope was curated by the agent, not independently confirmed through user interviews.",
+    "No causal old/new-model comparison, public launch, pilot demand or market exclusivity established."
+  ],
+  "tests": {
+    "passed": 185,
+    "seconds": 91.79,
+    "review_regressions_observed_red": 6,
+    "review_regressions_green": 6,
+    "mobile_regression_red_then_green": true
+  },
+  "review": {
+    "fresh_reviewers": 1,
+    "critical_findings": 0,
+    "important_findings_fixed": 3,
+    "fix_passes": 1,
+    "deferred_minors": 1,
+    "deferred": "Skipped arms omit A-to-candidate comparison rows; whole run remains inconclusive."
+  },
+  "verified_at": "2026-10-08T06:13:24.223024+00:00",
+  "implementation_commit": "25ed8d6c9b3cbec5d8c5736c3834bca2c11d299d",
+  "live_harness_commit": "c4662b7b8abb3b77ca6737bde6d920b4991364ad",
+  "clean_install": {
+    "wheel": "secondlook_revisit-0.4.0-py3-none-any.whl",
+    "working_directory": "/tmp",
+    "mode_compare_three": "zero-call passing baseline verified",
+    "readonly_input_probe": "6/9 expected original behavior",
+    "snapshot_restore_byte_identical": true,
+    "reconciliation": "passed",
+    "duplicate_suppression": "passed",
+    "model_calls": 0,
+    "dependency_check": "passed",
+    "installed_python_modules_match_fixed_source": true
+  },
+  "browser": {
+    "desktop": "1440x1050",
+    "mobile": "390x844",
+    "horizontal_overflow": false,
+    "filters": "passed; pairwise table stays visible",
+    "lightbox": "passed",
+    "actual_generated_ugv_mobile": "viewed and checked",
+    "page_errors": []
+  }
+}

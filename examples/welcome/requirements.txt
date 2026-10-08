@@ -1,0 +1,6 @@
+Welcome a reader with one accessible level-one heading whose exact text is Hello.
+Keep a visible link named Documentation pointing to https://example.com/docs.
+The page must render locally, without a network request or build step.
+Use an accessible, readable layout. The old page's markup and style are not requirements.
+
+Source: independently authored synthetic product requirement for the Second Look quickstart.

@@ -1,0 +1,205 @@
+{
+  "version": 1,
+  "kind": "offline_reference",
+  "status": "completed",
+  "capsule": {
+    "title": "Feedback search and export — synthetic reference",
+    "checks": [
+      {
+        "id": "check-1",
+        "name": "Check 1"
+      },
+      {
+        "id": "check-2",
+        "name": "Check 2"
+      },
+      {
+        "id": "check-3",
+        "name": "Check 3"
+      },
+      {
+        "id": "check-4",
+        "name": "Check 4"
+      },
+      {
+        "id": "check-5",
+        "name": "Check 5"
+      },
+      {
+        "id": "check-6",
+        "name": "Check 6",
+        "held_out": true
+      },
+      {
+        "id": "check-7",
+        "name": "Check 7"
+      },
+      {
+        "id": "check-8",
+        "name": "Check 8",
+        "held_out": true
+      }
+    ],
+    "intent": {
+      "text": "Let a product team search feedback titles or tags without caring about case or surrounding whitespace, combine search with priority filters, and export exactly the visible items as valid CSV that preserves the original fields. Counts and reset must remain truthful.",
+      "source": "Explicitly included by the exporter",
+      "confirmed": true
+    },
+    "baseline": {
+      "provenance": "Deliberately flawed synthetic fixture; not a historical model output."
+    }
+  },
+  "arms": {
+    "A": {
+      "label": "Saved artifact",
+      "status": "completed",
+      "models": [
+        "unknown"
+      ],
+      "cost_usd": 0,
+      "tokens": {
+        "total": 0
+      },
+      "evaluation": {
+        "status": "completed",
+        "passed": 3,
+        "total": 8,
+        "checks": [
+          {
+            "id": "check-1",
+            "passed": true,
+            "error_kind": "behavior"
+          },
+          {
+            "id": "check-2",
+            "passed": true,
+            "error_kind": "behavior"
+          },
+          {
+            "id": "check-3",
+            "passed": false,
+            "error_kind": "behavior"
+          },
+          {
+            "id": "check-4",
+            "passed": false,
+            "error_kind": "behavior"
+          },
+          {
+            "id": "check-5",
+            "passed": false,
+            "error_kind": "behavior"
+          },
+          {
+            "id": "check-6",
+            "passed": false,
+            "error_kind": "behavior"
+          },
+          {
+            "id": "check-7",
+            "passed": true,
+            "error_kind": "behavior"
+          },
+          {
+            "id": "check-8",
+            "passed": false,
+            "error_kind": "behavior"
+          }
+        ],
+        "screenshots": {}
+      }
+    },
+    "R": {
+      "label": "Hand-authored reference (no model)",
+      "status": "completed",
+      "models": [
+        "none: hand-authored reference"
+      ],
+      "cost_usd": 0,
+      "tokens": {
+        "total": 0
+      },
+      "budget_usd": 2.0,
+      "evaluation": {
+        "status": "completed",
+        "passed": 8,
+        "total": 8,
+        "checks": [
+          {
+            "id": "check-1",
+            "passed": true,
+            "error_kind": "behavior"
+          },
+          {
+            "id": "check-2",
+            "passed": true,
+            "error_kind": "behavior"
+          },
+          {
+            "id": "check-3",
+            "passed": true,
+            "error_kind": "behavior"
+          },
+          {
+            "id": "check-4",
+            "passed": true,
+            "error_kind": "behavior"
+          },
+          {
+            "id": "check-5",
+            "passed": true,
+            "error_kind": "behavior"
+          },
+          {
+            "id": "check-6",
+            "passed": true,
+            "error_kind": "behavior"
+          },
+          {
+            "id": "check-7",
+            "passed": true,
+            "error_kind": "behavior"
+          },
+          {
+            "id": "check-8",
+            "passed": true,
+            "error_kind": "behavior"
+          }
+        ],
+        "screenshots": {}
+      }
+    }
+  },
+  "comparisons": {
+    "A_R": {
+      "verdict": "improved",
+      "improvements": [
+        "check-3",
+        "check-4",
+        "check-5",
+        "check-6",
+        "check-8"
+      ],
+      "regressions": []
+    }
+  },
+  "manifest": {
+    "input_result_sha256": "fb6332679c6c3484bbdd3396369b1081b370bcea68a44f5895735a70f66fb8c2",
+    "source": "d161974a58956fd915b98dafb0c4924aded8be892d0b34d433e083ebb878ffd0",
+    "checks": "66b63820c06e197d34f2876a108d07c36ddbd2c418c550cc089344e291e5f08f"
+  },
+  "model_calls": 0,
+  "sharing": {
+    "metrics_only": false,
+    "intent_included": true,
+    "screenshots_included": true,
+    "note": "Source, raw prompts/receipts, check definitions, private labels and paths are excluded. Metrics are reported from the input result; this export is not independent verification."
+  },
+  "source_unchanged": true,
+  "cost": {
+    "total_usd": 0.0,
+    "limit_usd": 2.0,
+    "known_spend_usd": 0.0,
+    "basis": "No model was called"
+  }
+}

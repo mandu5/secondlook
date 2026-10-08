@@ -1,0 +1,166 @@
+{
+  "version": "0.3.0",
+  "verified_at": "2026-10-08T00:07:05.565671+09:00",
+  "implementation_commit": "c2b4db90f7b3065ada857de0f138aea475370ee9",
+  "tests": {
+    "passed": 145,
+    "seconds": 72.28,
+    "review_regressions_observed_failing_before_fix": 11
+  },
+  "review": {
+    "fresh_reviewers": 1,
+    "important_findings_fixed": 3,
+    "critical_findings": 0,
+    "deferred_minors": 0,
+    "fix_passes": 1
+  },
+  "catalog": {
+    "source": "https://openrouter.ai/api/v1/models",
+    "observed_at": "2026-10-07T15:02:15.531576+00:00",
+    "baseline": true,
+    "model_count": 465,
+    "fingerprint": "e6ab0c8b078140cbea9916f3849c5c4ad1b6e4966f60ece4bc2336f52747e59d",
+    "model_calls": 0
+  },
+  "final_live_campaign": {
+    "kind": "Synthetic artifacts with real model calls",
+    "model": "claude-sonnet-5-5",
+    "historical_model": "unknown",
+    "mode": "reframe",
+    "budget_usd": 1.9,
+    "allocated_usd": 1.05,
+    "model_calls": 4,
+    "tokens": 13158,
+    "api_equivalent_usd": 0.0600012,
+    "terminal_receipts": 4,
+    "original_sources_unchanged": true,
+    "tasks": [
+      {
+        "task_id": "feedback-board",
+        "status": "completed",
+        "arms": {
+          "A": {
+            "passed": 3,
+            "total": 8,
+            "models": [
+              "unknown"
+            ]
+          },
+          "C": {
+            "passed": 8,
+            "total": 8,
+            "models": [
+              "claude-sonnet-5-5"
+            ]
+          }
+        },
+        "comparisons": {
+          "A_C": {
+            "verdict": "improved",
+            "improvements": [
+              "search",
+              "export",
+              "quoting",
+              "whitespace",
+              "empty-export"
+            ],
+            "regressions": [],
+            "unchanged": [
+              "initial",
+              "priority",
+              "reset"
+            ]
+          }
+        },
+        "total_usd": 0.0348476,
+        "tokens": 7844
+      },
+      {
+        "task_id": "focus-timer",
+        "status": "completed",
+        "arms": {
+          "A": {
+            "passed": 2,
+            "total": 5,
+            "models": [
+              "unknown"
+            ]
+          },
+          "C": {
+            "passed": 5,
+            "total": 5,
+            "models": [
+              "claude-sonnet-5-5"
+            ]
+          }
+        },
+        "comparisons": {
+          "A_C": {
+            "verdict": "improved",
+            "improvements": [
+              "reset-input",
+              "reject-negative",
+              "reject-fraction"
+            ],
+            "regressions": [],
+            "unchanged": [
+              "initial",
+              "duration"
+            ]
+          }
+        },
+        "total_usd": 0.0251536,
+        "tokens": 5314
+      }
+    ]
+  },
+  "all_v03_provider_verification": {
+    "campaigns": 2,
+    "model_calls": 8,
+    "tokens": 29729,
+    "api_equivalent_usd": 0.1381298,
+    "scope": "Provider experiment receipts only; excludes chat/reviewer inference, not a subscription invoice"
+  },
+  "repeat_plan": {
+    "selected": 0,
+    "decisions": [
+      {
+        "task_id": "research-note",
+        "reason": "no_execution_adapter"
+      },
+      {
+        "task_id": "feedback-board",
+        "reason": "already_attempted"
+      },
+      {
+        "task_id": "focus-timer",
+        "reason": "already_attempted"
+      }
+    ],
+    "model_calls": 0
+  },
+  "clean_install": {
+    "wheel": "secondlook_revisit-0.3.0-py3-none-any.whl",
+    "working_directory": "/tmp",
+    "offline_portfolio": "passed, zero model calls",
+    "snapshot_restore_byte_identical": true,
+    "live_catalog_count": 465,
+    "dependency_check": "passed"
+  },
+  "browser": {
+    "desktop": "1440x1050",
+    "mobile": "390x844",
+    "horizontal_overflow": false,
+    "filters": "passed",
+    "report_navigation": "passed",
+    "page_errors": []
+  },
+  "limitations": [
+    "Only static HTML execution adapter; generic problems remain parked.",
+    "Catalog additions are availability observations, not measured capability gains.",
+    "No background service installed; watch observes once and only prepares plans.",
+    "Candidate tags and impact/cost ranking are explicit claims/estimates.",
+    "One sample per task in the final campaign; no causal historical model uplift or market-demand claim.",
+    "Intent-first brief followed by bounded edits; no clean-slate rebuild."
+  ]
+}

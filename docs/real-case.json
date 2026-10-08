@@ -1,0 +1,95 @@
+{
+  "date": "2026-10-07",
+  "version": "0.2.0",
+  "case": "Existing private self-contained catalog; no injected failure",
+  "historical_model": "unknown",
+  "tasks": 1,
+  "trials_per_workflow": 1,
+  "provider_cli": "2.1.289 (Claude Code)",
+  "environment": {
+    "python": "3.11.9",
+    "platform": "macOS-26.6.1-arm64-arm-64bit",
+    "playwright": "1.63.0"
+  },
+  "context": {
+    "runtime_bytes": 120410551,
+    "context_bytes": 14829,
+    "excluded_bytes": 120395722
+  },
+  "context_note": "Byte exclusion, not measured token savings; provider usage includes prompt overhead and cache.",
+  "baseline_probe": {
+    "passed": 7,
+    "total": 10,
+    "model_calls": 0
+  },
+  "arms": {
+    "A": {
+      "passed": 7,
+      "total": 10,
+      "reported_tokens": 0,
+      "api_equivalent_usd": 0,
+      "actual_models": [
+        "unknown"
+      ]
+    },
+    "B": {
+      "passed": 10,
+      "total": 10,
+      "reported_tokens": 9634,
+      "api_equivalent_usd": 0.041328,
+      "actual_models": [
+        "claude-sonnet-5-5"
+      ]
+    },
+    "C": {
+      "passed": 10,
+      "total": 10,
+      "reported_tokens": 13756,
+      "api_equivalent_usd": 0.0620656,
+      "actual_models": [
+        "claude-sonnet-5-5"
+      ]
+    }
+  },
+  "model_calls": 3,
+  "total_api_equivalent_usd": 0.1033936,
+  "total_reported_tokens": 23390,
+  "workflow_verdict": "no_measured_gain",
+  "source_unchanged": true,
+  "protected_regions_unchanged": true,
+  "checks_hidden_from_models": true,
+  "check_viewports": [
+    [
+      1200,
+      820
+    ],
+    [
+      390,
+      844
+    ]
+  ],
+  "private_evidence": "Raw session request, app, screenshots and receipts remain local and uncommitted.",
+  "limitations": [
+    "One task, one sample per workflow.",
+    "No known historical-model comparison.",
+    "No real-user pilot or adoption study.",
+    "UI checks do not measure recommendation quality."
+  ],
+  "exploratory_followup": {
+    "timing": "Post hoc: checks authored after reviewing candidate implementations",
+    "changes_to_original_comparison": false,
+    "additional_model_calls": 0,
+    "total_checks": 2,
+    "passed": {
+      "A": 0,
+      "B": 0,
+      "C": 2
+    },
+    "checks": [
+      "Removing only favorite preserves non-BODY focus",
+      "Removing first favorite focuses remaining favorite"
+    ],
+    "page_errors": 0,
+    "interpretation": "Observed additional behavior, not a preregistered comparison or proof of workflow superiority."
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "version": "0.5.0",
+  "scope": "First public beta release; no new paid model trials",
+  "tests": {
+    "full_suite": {
+      "passed": 202,
+      "seconds": 98.79
+    },
+    "after_presentation_fix": {
+      "passed": 20,
+      "seconds": 8.73,
+      "scope": "Existing sharing and CLI report tests"
+    }
+  },
+  "browser": [
+    {
+      "width": 1440,
+      "keyboard": true,
+      "cost_interactions": true,
+      "copy": true,
+      "reports": true,
+      "errors": [],
+      "http_errors": []
+    },
+    {
+      "width": 390,
+      "keyboard": true,
+      "cost_interactions": true,
+      "copy": true,
+      "reports": true,
+      "errors": [],
+      "http_errors": []
+    },
+    {
+      "width": 320,
+      "keyboard": true,
+      "cost_interactions": true,
+      "copy": true,
+      "reports": true,
+      "errors": [],
+      "http_errors": []
+    }
+  ],
+  "clean_install": {
+    "installed_version": "0.5.0",
+    "source": "installed wheel outside checkout",
+    "model_calls": 0,
+    "offline_scores": [
+      3,
+      8
+    ],
+    "total": 8,
+    "own_input_probe": [
+      1,
+      2
+    ],
+    "share": true,
+    "original_unchanged": true
+  },
+  "doctor": {
+    "version": "0.5.0",
+    "ready": true,
+    "checks": [
+      {
+        "name": "python",
+        "ok": true,
+        "detail": "3.11.9"
+      },
+      {
+        "name": "chromium",
+        "ok": true,
+        "detail": "153.0.8010.12"
+      },
+      {
+        "name": "provider",
+        "ok": true,
+        "detail": "2.1.289 (Claude Code)",
+        "note": "CLI flags checked. Authentication and model availability are unverified."
+      }
+    ],
+    "model_calls": 0
+  },
+  "review": {
+    "independent": true,
+    "critical": 0,
+    "important": 0,
+    "minor_found": 1,
+    "minor_fixed": 1,
+    "notes": "review-v0.5.md"
+  },
+  "model_calls_added": 0,
+  "historical_live_evidence": "verification-v0.4.json",
+  "distribution": "GitHub Releases; no PyPI upload",
+  "public_urls": {
+    "repository": "https://github.com/mandu5/secondlook",
+    "demo": "https://mandu5.github.io/secondlook/",
+    "release": "https://github.com/mandu5/secondlook/releases/tag/v0.5.0"
+  },
+  "remote_verification": "Final remote receipts are attached to the GitHub release after publication; local checks do not imply remote completion."
+}

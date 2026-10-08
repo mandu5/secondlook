@@ -38,6 +38,10 @@ def read_bytes(path: Path, limit: int) -> bytes:
 
 
 def read_json(path: Path, limit: int, fenced: bool = False) -> object:
+    return parse_json(read_bytes(path, limit), path, fenced)
+
+
+def parse_json(raw: bytes, path: Path, fenced: bool = False) -> object:
     def pairs(items):
         obj = {}
         for key, value in items:
@@ -50,14 +54,14 @@ def read_json(path: Path, limit: int, fenced: bool = False) -> object:
         raise ValueError("Nonfinite JSON number")
 
     try:
-        text = read_bytes(path, limit).decode("utf-8").strip()
+        text = raw.decode("utf-8").strip()
         if fenced:
             match = re.fullmatch(r"```(?:json)?[ \t]*\r?\n(.*?)\r?\n```", text, re.DOTALL)
             if match:
                 text = match.group(1)
         value = json.loads(text, object_pairs_hook=pairs, parse_constant=constant)
-        # JSON also permits exponents that overflow a Python float.
-        json.dumps(value, allow_nan=False)
+        # Reject overflowing numbers and escaped, unpaired Unicode surrogates.
+        json.dumps(value, ensure_ascii=False, allow_nan=False).encode("utf-8")
         return value
     except (ValueError, UnicodeError, RecursionError) as error:
         raise CapsuleError(f"Invalid finite JSON in {Path(path).name}: {error}") from error

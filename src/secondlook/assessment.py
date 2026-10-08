@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import copy
 from datetime import datetime, timezone
+import hashlib
 import itertools
 import math
 from pathlib import Path
@@ -12,7 +13,7 @@ from .artifacts import artifact_from_sources
 from .core import (CapsuleError, apply_edits, atomic_text, fingerprint,
                    public_capsule, write_bundle, write_json, write_rebuild)
 from .evaluate import compare_results, evaluate
-from .handoff import MAX_RESPONSE_BYTES, load_request, new_output, read_json
+from .handoff import MAX_RESPONSE_BYTES, load_request, new_output, parse_json, read_bytes
 from .runner import _diff, _tokens, execution_identity
 
 
@@ -59,7 +60,8 @@ def assess_responses(request_path: Path, responses: list[Path], labels: list[str
     payload_key = "files" if mode == "rebuild" else "edits"
     payloads = []
     for path in responses:
-        data = read_json(path, MAX_RESPONSE_BYTES, fenced=True)
+        raw = read_bytes(path, MAX_RESPONSE_BYTES)
+        data = parse_json(raw, path, fenced=True)
         if (not isinstance(data, dict) or set(data) != {"request_id", "summary", payload_key}
                 or data.get("request_id") != request["request_id"]):
             raise CapsuleError("Response must match this request_id and contain only summary and " + payload_key)
@@ -67,7 +69,12 @@ def assess_responses(request_path: Path, responses: list[Path], labels: list[str
             raise CapsuleError("Response summary must be a string of up to 2000 characters")
         if not isinstance(data[payload_key], list) or not 1 <= len(data[payload_key]) <= (32 if mode == "rebuild" else 20):
             raise CapsuleError("Response must include a bounded nonempty list of " + payload_key)
-        payloads.append(data)
+        fields = {"path", "content"} if mode == "rebuild" else {"path", "old", "new"}
+        if any(not isinstance(item, dict) or set(item) != fields
+               or any(not isinstance(value, str) for value in item.values())
+               for item in data[payload_key]):
+            raise CapsuleError("Response item fields must match the schema exactly and contain strings")
+        payloads.append((data, raw))
     output = new_output(output, Path(request_path))
     output.mkdir(parents=True, exist_ok=False)
     manifest = {**execution_identity(), "source": original.identity,
@@ -114,18 +121,20 @@ def assess_responses(request_path: Path, responses: list[Path], labels: list[str
         save()
         readonly = capsule.get("readonly_files", [])
         writable = [name for name in capsule["files"] if name not in readonly]
-        for index, (payload, label, meta) in enumerate(zip(payloads, labels, metadata), 1):
+        for index, ((payload, raw), label, meta) in enumerate(zip(payloads, labels, metadata), 1):
             name = f"E{index}"
             root = output / "arms" / name
             arm = {"label": f"Imported candidate {index}", "declared_model": label,
                    "models": [], "model_identity_basis": "owner-reported, unverified", "status": "running",
                    "cost_usd": meta.get("cost_usd"), "tokens": _tokens([{"usage": {k: v for k, v in meta.items() if k in TOKEN_FIELDS}}]),
                    "usage_basis": "owner-reported, unverified", "receipts": [],
-                   "response_sha256": fingerprint(payload), "summary": payload["summary"],
+                   "response_sha256": hashlib.sha256(raw).hexdigest(),
+                   "response_payload_sha256": fingerprint(payload), "summary": payload["summary"],
                    "input_policy": "independent_brief_and_readonly_files" if mode == "rebuild" else "legacy_source",
                    "input_policy_verified": False}
             result["arms"][name] = arm
             write_json(output / "responses" / f"{name}.json", payload)
+            (output / "responses" / f"{name}.raw.txt").write_bytes(raw)
             save()
             try:
                 write_bundle(root, {n: text for n, text in original.sources.items() if mode != "rebuild" or n in readonly})

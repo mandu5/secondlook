@@ -52,7 +52,8 @@ An ordinary response has this shape (copy the actual request ID):
 Each old anchor must occur exactly once. Rebuild responses use `files`, each with
 `path` and full `content`, for every writable file exactly once. Do not return
 read-only files. One enclosing Markdown JSON fence is accepted; unrelated prose,
-duplicate keys, nonfinite numbers, extra fields and mismatched IDs are refused.
+duplicate keys, invalid Unicode, nonfinite numbers, extra fields and mismatched
+IDs are refused before evaluation.
 
 ## 3. Compare locally
 
@@ -70,6 +71,12 @@ means an incomplete evaluation; completed behavior regressions still return 0.
 Bad input returns 2 before evaluation. Output must be a new directory outside
 the request. This command intentionally assesses passing baselines too: there is
 no model dispatch to save, and an already-created candidate can still regress.
+
+The local `responses/` folder retains each original response as `E1.raw.txt` and
+its parsed JSON as `E1.json` (likewise for later candidates). `response_sha256`
+hashes the exact imported bytes; `response_payload_sha256` identifies the parsed
+JSON independently of whitespace or enclosing fences. Both are consistency
+records, not proof of who generated the response.
 
 Model labels are **owner-reported and unverified**. Unknown tokens/cost stay
 unknown. Optional `--usage ./usage.json` accepts an array in response order:

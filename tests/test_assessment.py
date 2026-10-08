@@ -1,4 +1,5 @@
 import json
+import hashlib
 from pathlib import Path
 
 import pytest
@@ -133,3 +134,34 @@ def test_import_refuses_unexpected_response_fields_and_too_many_candidates(prepa
         assess_responses(folder, [path], ["A"], tmp_path / "out")
     with pytest.raises(CapsuleError, match="1|4|four"):
         assess_responses(folder, [path] * 5, ["A"] * 5, tmp_path / "out")
+
+
+def test_unpaired_surrogate_in_one_response_rejects_batch_before_evaluation(prepared, tmp_path):
+    from secondlook.assessment import assess_responses
+    folder, request_id = prepared
+    bad = response(folder, request_id, "bad-unicode.json", [{"path": "index.html", "old": "Wrong", "new": "\ud800"}])
+    good = response(folder, request_id, "valid.json", [{"path": "index.html", "old": "Wrong", "new": "Hello"}])
+    with pytest.raises(CapsuleError, match="JSON|UTF|Unicode"):
+        assess_responses(folder, [bad, good], ["Malformed", "Valid"], tmp_path / "out")
+    assert not (tmp_path / "out").exists()
+
+
+def test_nested_unknown_edit_fields_are_rejected_before_evaluation(prepared, tmp_path):
+    from secondlook.assessment import assess_responses
+    folder, request_id = prepared
+    path = response(folder, request_id, "extra.json", [{"path": "index.html", "old": "Wrong", "new": "Hello", "unexpected": "must reject"}])
+    with pytest.raises(CapsuleError, match="fields|keys|schema"):
+        assess_responses(folder, [path], ["A"], tmp_path / "out")
+    assert not (tmp_path / "out").exists()
+
+
+def test_raw_response_bytes_are_retained_and_hash_the_exact_import(prepared, tmp_path):
+    from secondlook.assessment import assess_responses
+    folder, request_id = prepared
+    path = response(folder, request_id, "raw.json", [{"path": "index.html", "old": "Wrong", "new": "Hello"}])
+    raw = b'```json\r\n' + path.read_bytes() + b'\r\n```\r\n'
+    path.write_bytes(raw)
+    result = assess_responses(folder, [path], ["A"], tmp_path / "out")
+    assert result["arms"]["E1"]["response_sha256"] == hashlib.sha256(raw).hexdigest()
+    assert (tmp_path / "out" / "responses" / "E1.raw.txt").read_bytes() == raw
+    assert result["arms"]["E1"]["response_payload_sha256"] != result["arms"]["E1"]["response_sha256"]

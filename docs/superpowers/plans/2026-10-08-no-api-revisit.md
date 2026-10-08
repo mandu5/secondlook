@@ -31,17 +31,17 @@
 
 **Interfaces:** `prepare_request(capsule_path: Path, output: Path, mode: str = "rebuild") -> dict`; `load_request(path: Path) -> tuple[dict, dict, Artifact]`; `read_json(path: Path, limit: int, fenced: bool = False) -> object`.
 
-- [ ] Write tests for confirmed intent, source-blind rebuild, ordinary projections,
+- [x] Write tests for confirmed intent, source-blind rebuild, ordinary projections,
   relocation, tampered source/checks/prompt, traversal/symlinks, bounded strict JSON.
   Core example: prepare a confirmed rebuild with a `LEGACY_SECRET` sentinel;
   assert it is absent from `request.md`, move the directory, delete the original,
   and verify `load_request` still returns the saved source.
-- [ ] Run `python -m pytest tests/test_handoff.py -q`; expect missing-feature failure.
-- [ ] Implement snapshot creation, normalized capsule hash and response schema
+- [x] Run `python -m pytest tests/test_handoff.py -q`; expect missing-feature failure.
+- [x] Implement snapshot creation, normalized capsule hash and response schema
   using the existing `capture_artifact`, `build_prompt` and `require_rebuild`.
   Use exclusive new-directory creation and bounded reads; validate hashes before
   loading the source; hard-code the snapshot root to `baseline`.
-- [ ] Run the same test command; expect all pass, then commit Task 1.
+- [x] Run the same test command; expect all pass, then commit Task 1.
 
 ### Task 2: Local assessment of external candidates
 
@@ -50,17 +50,17 @@
 **Interfaces:** Consume `load_request/read_json`. Produce
 `assess_responses(request_path: Path, responses: list[Path], labels: list[str], output: Path, usage: list | None = None) -> dict`.
 
-- [ ] Write real-browser tests: baseline 1/2, one candidate 2/2, one candidate
+- [x] Write real-browser tests: baseline 1/2, one candidate 2/2, one candidate
   0/2 -> A_E1 improved, A_E2 regression; original bytes unchanged; all pairs.
   Test wrong request ID rejected before output, readonly edit fails per arm,
   duplicate response path rejection, duplicate content evidence reuse, unknown
   and partial usage, invalid counts/NaN, and bounded fenced responses.
-- [ ] Run `python -m pytest tests/test_assessment.py -q`; expect missing-feature failure.
-- [ ] Validate all envelopes and owner metadata, persist a running result, build
+- [x] Run `python -m pytest tests/test_assessment.py -q`; expect missing-feature failure.
+- [x] Validate all envelopes and owner metadata, persist a running result, build
   candidate copies via `apply_edits/write_rebuild`, evaluate A/E1–E4, and save
   after each arm. Use actual full-source identity for within-batch reuse. Produce
   `imported_candidates` results compatible with the existing renderer.
-- [ ] Run the same test command; expect all pass, then commit Task 2.
+- [x] Run the same test command; expect all pass, then commit Task 2.
 
 ### Task 3: CLI, honest reports and portable sharing
 
@@ -70,25 +70,25 @@
   sharing allows A/E1–E4 only for imported results, omits user labels and keeps
   cost provenance. Existing commands and formats continue to work.
 
-- [ ] Write CLI roundtrip tests with two frozen candidates and unknown cost;
+- [x] Write CLI roundtrip tests with two frozen candidates and unknown cost;
   assert report says imported/user-reported, escapes malicious labels, and the
   shared report contains no labels/source/path, with unknown costs preserved.
-- [ ] Run `python -m pytest tests/test_import_cli.py -q`; expect missing commands.
-- [ ] Add parser/dispatch and imported report copy; use explicit kind-aware
+- [x] Run `python -m pytest tests/test_import_cli.py -q`; expect missing commands.
+- [x] Add parser/dispatch and imported report copy; use explicit kind-aware
   budget/token text and generic shared labels; preserve duplicate-evidence flags.
-- [ ] Run `python -m pytest tests/test_import_cli.py tests/test_sharing.py tests/test_cli.py -q`;
+- [x] Run `python -m pytest tests/test_import_cli.py tests/test_sharing.py tests/test_cli.py -q`;
   expect all pass, then commit Task 3.
 
 ### Task 4: Research, release and external verification
 
 **Files:** Research/usage docs, README EN/KO, roadmap, changelog, site, version metadata.
 
-- [ ] Save dated primary-source research and explain what changed the design.
-- [ ] Document an executable prepare/assess/share workflow and the manual external
+- [x] Save dated primary-source research and explain what changed the design.
+- [x] Document an executable prepare/assess/share workflow and the manual external
   generation boundary. Add a clearly hand-authored public import demo.
-- [ ] Run full pytest, compileall, build distributions and install the wheel in a
+- [x] Run full pytest, compileall, build distributions and install the wheel in a
   clean venv; run actual prepare/assess/share commands from outside the repo.
-- [ ] Verify desktop/mobile report interactions and sanitization. Commit, request
+- [x] Verify desktop/mobile report interactions and sanitization. Commit, request
   one independent review, address material findings with reproducing tests.
 - [ ] Publish source/tag/assets and verify anonymous downloads and CI. Reconcile
   free-hosting authorization separately; do not claim a new URL before verification.

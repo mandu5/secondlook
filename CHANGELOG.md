@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.6.0 — use the AI tool you already have
+
+- `prepare`: portable source/intent/check snapshots and a model-facing request;
+  ordinary patching or source-blind rebuilding, with request/response identity.
+- `assess`: import 1–4 external responses, compare all pairs with local Chromium,
+  retain failures and reuse explicitly identical within-batch browser evidence.
+- Imported reports distinguish local evaluation from external generation. Model
+  labels and optional usage are owner-reported; unknown costs remain unknown.
+- Portable sharing supports imported candidates and removes private model labels.
+- No new runtime dependencies, API purchases or automated external chat submission.
+- Dated research update and a hand-authored improvement/regression example.
+
 ## 0.5.0 — first public beta
 
 - Installable GitHub release and browser-accessible no-key demonstration.

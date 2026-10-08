@@ -8,7 +8,7 @@ against the same acceptance checks—with screenshots, regressions, tokens and c
 
 [Live demo](https://mandu5.github.io/secondlook/) · [Quickstart](docs/quickstart.md) · [한국어](README.ko.md) · [Releases](https://github.com/mandu5/secondlook/releases)
 
-MIT · Python 3.11+ · macOS / Linux · **0.5 beta**
+MIT · Python 3.11+ · macOS / Linux · **0.6 beta**
 
 ![Second Look compares checked behavior and cost](docs/assets/report-preview.png)
 
@@ -17,7 +17,7 @@ MIT · Python 3.11+ · macOS / Linux · **0.5 beta**
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
-python -m pip install 'https://github.com/mandu5/secondlook/releases/download/v0.5.0/secondlook_revisit-0.5.0-py3-none-any.whl'
+python -m pip install 'https://github.com/mandu5/secondlook/releases/download/v0.6.0/secondlook_revisit-0.6.0-py3-none-any.whl'
 python -m playwright install chromium
 secondlook doctor
 secondlook demo --offline --output ./first-look
@@ -52,10 +52,27 @@ comparison. [Complete own-project walkthrough](docs/quickstart.md#use-your-own-s
 | **C · Reframe + patch** | Purpose first; existing source only after an independent brief |
 | **D · Rebuild** | Independent requirements and read-only data, without old writable source |
 
-Actual execution currently supports **trusted static HTML/CSS/JS** through a
-tool-free Claude Code CLI adapter. Backends, arbitrary repositories, Python
-execution and other providers are not supported. Any type of problem can be
-preserved in the library; unsupported tasks stay parked.
+Actual execution supports **trusted static HTML/CSS/JS**. Generate automatically
+with the tool-free Claude Code CLI adapter, or import responses from the AI tool
+you already use. Backends, arbitrary repositories and Python execution are not
+supported. Other problem types can be preserved in the library and stay parked.
+
+## Use your existing AI tool — no new API account
+
+```bash
+secondlook prepare ./capsule.json --mode ordinary --output ./request
+# Give only request/request.md to your AI tool in a fresh conversation.
+# Save its JSON response, then compare locally:
+secondlook assess ./request --response ./response-a.json --label 'My chosen model' \
+  --output ./comparison
+```
+
+Repeat `--response` and `--label` to compare up to four candidates. Use
+`--mode rebuild` with independently confirmed requirements to omit old writable
+source. The same frozen browser checks evaluate every candidate. These commands
+make zero model calls; external generation may have a cost. Model labels and
+optional usage records are owner-reported, and missing cost stays **Unknown**.
+[Complete walkthrough and limits](docs/external-models.md).
 
 ## Revisit selectively
 
@@ -103,7 +120,8 @@ evidence or proof of general superiority. [Protocol and all costs](docs/real-cas
 
 Promptfoo, LangSmith, Spec Kit and other projects cover important parts of this
 space. Second Look explores the connection between preserved intent, revisit
-selection and implementation alternatives. [Prior art and product hypothesis](docs/research-v0.3.md).
+selection and implementation alternatives. [Prior art](docs/research-v0.3.md) ·
+[Updated research and v0.6 decisions](docs/research-v0.6.md).
 
 ## Contribute
 
@@ -120,7 +138,8 @@ python -m pytest -q
 [CLI reference](docs/cli-reference.md) · [Clean-slate protocol](docs/clean-slate.md) ·
 [Changelog](CHANGELOG.md) · [Roadmap](docs/roadmap.md)
 
-Costs are CLI-reported API-equivalent estimates, not subscription invoices.
+Live-run costs are CLI-reported API-equivalent estimates, not subscription invoices.
+Imported costs and model labels are owner-reported, not provider-verified.
 Provider budget stops can overshoot by an in-flight response. Local browser
 network isolation is not an OS sandbox for hostile code. Keep private reports
 private. No automatic adoption, telemetry or background model runs.

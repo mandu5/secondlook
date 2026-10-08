@@ -2,6 +2,21 @@
 
 For the first run, start with the [quickstart](quickstart.md). This reference covers advanced capture, replay and evidence boundaries.
 
+## Import results from your existing AI tool
+
+```bash
+secondlook prepare capsule.json --mode ordinary --output request
+secondlook assess request --response response-a.json --label 'Model A' \
+  --response response-b.json --label 'Model B' --output comparison
+```
+
+`prepare` defaults to `--mode rebuild`, which requires a confirmed independent
+brief and both intent/preservation checks. Give only `request.md` to the external
+tool. `assess` accepts 1–4 response/label pairs and optional `--usage FILE` with
+an array of owner-reported costs/token counts in the same order. Both commands
+make zero model calls. Imported metadata is unverified; absent cost is unknown.
+See [formats, exit codes, privacy and a reproducible example](external-models.md).
+
 ## Use your own problem library
 
 ```bash

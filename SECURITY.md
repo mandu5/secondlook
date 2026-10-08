@@ -11,6 +11,12 @@ intent text and screenshots require explicit options and may reveal private data
 No telemetry is collected and no report is automatically uploaded. `watch`
 contacts the public model catalog; explicit live runs contact Claude through its CLI.
 
+`prepare` and `assess` never contact a model. Share only the generated `request.md`
+with your external AI tool; other request files contain private source/checks.
+External tool context, model identity and generation usage cannot be verified.
+Snapshots and hashes detect inconsistent input, not deliberate forgery. Imported
+code is evaluated with the same trusted-static-app boundary described above.
+
 Cost stops are best effort. An in-flight response can overshoot its stop budget.
 Unknown outcomes remain blocked; preserve receipts before manual reconciliation.
 

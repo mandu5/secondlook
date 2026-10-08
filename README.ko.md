@@ -9,14 +9,14 @@
 [설치 없이 데모 보기](https://mandu5.github.io/secondlook/) · [English](README.md) ·
 [다운로드](https://github.com/mandu5/secondlook/releases)
 
-MIT · Python 3.11+ · macOS / Linux · **0.5 beta**
+MIT · Python 3.11+ · macOS / Linux · **0.6 beta**
 
 ## 모델 계정 없이 시작
 
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
-python -m pip install 'https://github.com/mandu5/secondlook/releases/download/v0.5.0/secondlook_revisit-0.5.0-py3-none-any.whl'
+python -m pip install 'https://github.com/mandu5/secondlook/releases/download/v0.6.0/secondlook_revisit-0.6.0-py3-none-any.whl'
 python -m playwright install chromium
 secondlook doctor
 secondlook demo --offline --output ./first-look
@@ -45,9 +45,25 @@ secondlook probe ./capsule.json --output ./baseline
 기존 코드 없이 새로 구현하는 D 방식도 비교합니다.
 [전체 실행 예시](docs/quickstart.md).
 
-현재 실행 adapter는 **신뢰할 수 있는 static HTML/CSS/JS + Claude Code CLI**입니다.
-Python·backend·임의 저장소 실행과 다른 provider는 지원하지 않습니다.
+현재 평가 대상은 **신뢰할 수 있는 static HTML/CSS/JS**입니다. Claude Code CLI로
+자동 생성하거나, 기존에 쓰는 AI 도구의 결과를 가져와 평가할 수 있습니다.
+Python·backend·임의 저장소 실행은 지원하지 않습니다.
 연구·문서·기획 과제도 보관할 수 있지만 실행 adapter가 없으면 보류됩니다.
+
+## 추가 API 계정 없이 기존 AI 도구 사용
+
+```bash
+secondlook prepare ./capsule.json --mode ordinary --output ./request
+# 새 대화에 request/request.md만 전달하고 JSON 응답을 저장합니다.
+secondlook assess ./request --response ./response-a.json --label '사용한 모델명' \
+  --output ./comparison
+```
+
+`--response`와 `--label`을 반복하면 최대 네 후보를 한 화면에서 비교합니다.
+독립적인 요구사항을 확인한 capsule은 `--mode rebuild`로 기존 구현을 제외할 수
+있습니다. 두 명령의 모델 호출은 0회이고, 외부 생성 비용은 별개입니다. 모델명과
+사용량은 사용자 입력으로 표시하며 모르는 비용을 0원으로 바꾸지 않습니다.
+외부 생성과 응답 저장 단계는 수동입니다. [사용 방법](docs/external-models.md).
 
 ## 토큰과 판단 비용을 줄이는 방법
 
@@ -77,5 +93,5 @@ prompt, raw receipt, 개인 경로와 상세 오류는 제외합니다. 화면·
 전체 측정](docs/real-cases-v0.4.md)을 공개합니다. 과거 제작 모델은 미상이며,
 SOTA·일반적 우월성·시장 수요를 증명한 결과는 아닙니다.
 
-[선행 도구·차별화 가설](docs/research-v0.3.md) · [기여 안내](CONTRIBUTING.md) ·
+[선행 도구·차별화 가설](docs/research-v0.3.md) · [v0.6 추가 조사](docs/research-v0.6.md) · [기여 안내](CONTRIBUTING.md) ·
 [데이터 경계](SECURITY.md) · [명령어 참고](docs/cli-reference.md)

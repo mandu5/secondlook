@@ -1,0 +1,278 @@
+{
+  "version": 1,
+  "kind": "imported_candidates",
+  "status": "completed",
+  "capsule": {
+    "title": "Hand-authored import demo · no model performance claim",
+    "checks": [
+      {
+        "id": "check-1",
+        "name": "Check 1"
+      },
+      {
+        "id": "check-2",
+        "name": "Check 2"
+      },
+      {
+        "id": "check-3",
+        "name": "Check 3"
+      },
+      {
+        "id": "check-4",
+        "name": "Check 4"
+      },
+      {
+        "id": "check-5",
+        "name": "Check 5"
+      },
+      {
+        "id": "check-6",
+        "name": "Check 6",
+        "held_out": true
+      },
+      {
+        "id": "check-7",
+        "name": "Check 7"
+      },
+      {
+        "id": "check-8",
+        "name": "Check 8",
+        "held_out": true
+      }
+    ],
+    "intent": {
+      "text": "Let a product team search feedback titles or tags without caring about case or surrounding whitespace, combine search with priority filters, and export exactly the visible items as valid CSV that preserves the original fields. Counts and reset must remain truthful.",
+      "source": "Explicitly included by the exporter",
+      "confirmed": true
+    },
+    "baseline": {
+      "provenance": "Historical model authorship is unverified; source provenance excluded from this summary."
+    }
+  },
+  "arms": {
+    "A": {
+      "label": "Saved artifact",
+      "status": "completed",
+      "models": [
+        "unknown"
+      ],
+      "cost_usd": 0,
+      "tokens": {
+        "total": 0
+      },
+      "evaluation": {
+        "status": "completed",
+        "passed": 3,
+        "total": 8,
+        "checks": [
+          {
+            "id": "check-1",
+            "passed": true,
+            "error_kind": "behavior"
+          },
+          {
+            "id": "check-2",
+            "passed": true,
+            "error_kind": "behavior"
+          },
+          {
+            "id": "check-3",
+            "passed": false,
+            "error_kind": "behavior"
+          },
+          {
+            "id": "check-4",
+            "passed": false,
+            "error_kind": "behavior"
+          },
+          {
+            "id": "check-5",
+            "passed": false,
+            "error_kind": "behavior"
+          },
+          {
+            "id": "check-6",
+            "passed": false,
+            "error_kind": "behavior"
+          },
+          {
+            "id": "check-7",
+            "passed": true,
+            "error_kind": "behavior"
+          },
+          {
+            "id": "check-8",
+            "passed": false,
+            "error_kind": "behavior"
+          }
+        ],
+        "screenshots": {}
+      }
+    },
+    "E1": {
+      "label": "Imported candidate 1",
+      "status": "completed",
+      "models": [],
+      "cost_usd": 0,
+      "tokens": {
+        "total": 0
+      },
+      "evaluation": {
+        "status": "completed",
+        "passed": 8,
+        "total": 8,
+        "checks": [
+          {
+            "id": "check-1",
+            "passed": true,
+            "error_kind": "behavior"
+          },
+          {
+            "id": "check-2",
+            "passed": true,
+            "error_kind": "behavior"
+          },
+          {
+            "id": "check-3",
+            "passed": true,
+            "error_kind": "behavior"
+          },
+          {
+            "id": "check-4",
+            "passed": true,
+            "error_kind": "behavior"
+          },
+          {
+            "id": "check-5",
+            "passed": true,
+            "error_kind": "behavior"
+          },
+          {
+            "id": "check-6",
+            "passed": true,
+            "error_kind": "behavior"
+          },
+          {
+            "id": "check-7",
+            "passed": true,
+            "error_kind": "behavior"
+          },
+          {
+            "id": "check-8",
+            "passed": true,
+            "error_kind": "behavior"
+          }
+        ],
+        "screenshots": {}
+      }
+    },
+    "E2": {
+      "label": "Imported candidate 2",
+      "status": "completed",
+      "models": [],
+      "cost_usd": 0,
+      "tokens": {
+        "total": 0
+      },
+      "evaluation": {
+        "status": "completed",
+        "passed": 2,
+        "total": 8,
+        "checks": [
+          {
+            "id": "check-1",
+            "passed": true,
+            "error_kind": "behavior"
+          },
+          {
+            "id": "check-2",
+            "passed": false,
+            "error_kind": "behavior"
+          },
+          {
+            "id": "check-3",
+            "passed": false,
+            "error_kind": "behavior"
+          },
+          {
+            "id": "check-4",
+            "passed": false,
+            "error_kind": "behavior"
+          },
+          {
+            "id": "check-5",
+            "passed": false,
+            "error_kind": "behavior"
+          },
+          {
+            "id": "check-6",
+            "passed": false,
+            "error_kind": "behavior"
+          },
+          {
+            "id": "check-7",
+            "passed": true,
+            "error_kind": "behavior"
+          },
+          {
+            "id": "check-8",
+            "passed": false,
+            "error_kind": "behavior"
+          }
+        ],
+        "screenshots": {}
+      }
+    }
+  },
+  "comparisons": {
+    "A_E1": {
+      "verdict": "improved",
+      "improvements": [
+        "check-3",
+        "check-4",
+        "check-5",
+        "check-6",
+        "check-8"
+      ],
+      "regressions": []
+    },
+    "A_E2": {
+      "verdict": "regression",
+      "improvements": [],
+      "regressions": [
+        "check-2"
+      ]
+    },
+    "E1_E2": {
+      "verdict": "regression",
+      "improvements": [],
+      "regressions": [
+        "check-2",
+        "check-3",
+        "check-4",
+        "check-5",
+        "check-6",
+        "check-8"
+      ]
+    }
+  },
+  "manifest": {
+    "input_result_sha256": "412be2998953278449ae69c9c229101c1cc5154adf95ac665a5067636005542f",
+    "source": "d161974a58956fd915b98dafb0c4924aded8be892d0b34d433e083ebb878ffd0",
+    "checks": "66b63820c06e197d34f2876a108d07c36ddbd2c418c550cc089344e291e5f08f"
+  },
+  "model_calls": 0,
+  "sharing": {
+    "metrics_only": false,
+    "intent_included": true,
+    "screenshots_included": true,
+    "note": "Source, raw prompts/receipts, check definitions, private labels and paths are excluded. Metrics are reported from the input result; this export is not independent verification."
+  },
+  "source_unchanged": true,
+  "cost": {
+    "total_usd": 0,
+    "limit_usd": null,
+    "known_spend_usd": 0,
+    "basis": "External generation cost and usage are owner-reported, unverified; local assessment makes no model calls"
+  }
+}

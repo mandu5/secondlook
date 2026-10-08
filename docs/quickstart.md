@@ -3,7 +3,11 @@
 Python 3.11+ on macOS/Linux. Start with the installation commands in the
 [README](../README.md#try-it-with-zero-model-calls). Wheels are distributed through
 GitHub Releases; this project is not on PyPI. No account is needed for the offline
-demo, probe, library operations or export. Browser installation needs internet.
+demo, probe, prepare/assess, library operations or export. Browser installation needs internet.
+
+**Already use a chat or coding assistant?** [Prepare a request and import its
+response](external-models.md) without a new API account. This avoids Claude CLI
+setup for evaluation; external generation itself may still cost money.
 
 `secondlook doctor` launches Chromium locally. Add `--provider` to check that
 Claude Code supports the required flags; it does not verify login or model access.

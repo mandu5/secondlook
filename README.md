@@ -10,6 +10,11 @@ against the same acceptance checks—with screenshots, regressions, tokens and c
 
 MIT · Python 3.11+ · macOS / Linux · **0.6 beta**
 
+**User pilot:** help decide whether this beta earns a second use. Try one real
+task and report adoption, rejection or setup friction. [Participate](https://mandu5.github.io/secondlook/pilot/)
+· [Decision rules, review on October 23](docs/pilot-v0.6.md). Feature expansion is
+on hold while we test actual use; the existing release remains available.
+
 ![Second Look compares checked behavior and cost](docs/assets/report-preview.png)
 
 ## Try it with zero model calls

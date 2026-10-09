@@ -1,0 +1,41 @@
+.pilot-content { max-width: 1080px; }
+.pilot-content a { overflow-wrap: anywhere; }
+.pilot-hero { padding: 68px 0 48px; }
+.pilot-hero h1 { font-size: clamp(42px, 6vw, 76px); line-height: 1.06; letter-spacing: -2.6px; margin: 20px 0; }
+.pilot-hero h1 em { color: var(--green); font-weight: 400; }
+.pilot-lede { max-width: 650px; font-size: 19px; color: var(--muted); }
+.pilot-hero .actions { margin-top: 28px; }
+.pilot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.pilot-card { padding: 28px; border: 1px solid var(--line); background: var(--paper, #fffef9); min-width: 0; }
+.pilot-card h2 { font-size: 28px; letter-spacing: -0.7px; }
+.pilot-card p { font-size: 14px; }
+.pilot-card p.fine { font-size: 12px; }
+.pilot-section { padding: 46px 0; border-bottom: 1px solid var(--line); scroll-margin-top: 24px; }
+.pilot-section h2 { max-width: 800px; font-size: 34px; letter-spacing: -0.8px; line-height: 1.25; }
+.pilot-section > p { max-width: 790px; }
+.pilot-steps { max-width: 800px; padding-left: 24px; }
+.pilot-steps li { padding-left: 8px; margin: 20px 0; }
+.pilot-steps li strong { color: var(--ink); }
+.pilot-note { padding: 20px 24px; border-left: 3px solid var(--green); background: #e9ecdf; max-width: 800px; margin: 28px 0; }
+.pilot-note p { margin: 8px 0 0; font-size: 14px; }
+.pilot-section > .fine { max-width: 740px; }
+.pilot-content details { max-width: 800px; padding: 18px 22px; border: 1px solid var(--line); margin-top: 24px; }
+.pilot-content summary { cursor: pointer; font-weight: 600; }
+.pilot-content details p { font-size: 14px; }
+.pilot-content summary:focus-visible { outline: 2px solid var(--green); outline-offset: 5px; }
+.pilot-end { border-bottom: 0; padding-bottom: 56px; }
+[lang="ko"] { word-break: keep-all; overflow-wrap: anywhere; }
+@media (max-width: 680px) {
+  .pilot-hero { padding-top: 36px; }
+  .pilot-hero h1 { letter-spacing: -1.7px; }
+  .pilot-lede { font-size: 16px; }
+  .pilot-grid { grid-template-columns: 1fr; gap: 16px; }
+  .pilot-card { padding: 23px; }
+  .pilot-section { padding: 32px 0; }
+  .pilot-section h2 { font-size: 29px; }
+  .pilot-section > p, .pilot-steps { font-size: 14px; }
+  .pilot-steps { padding-left: 20px; }
+  .pilot-note { padding: 18px; }
+  .pilot-content details { padding: 16px; }
+  .pilot-page nav > a:first-child { display: inline; }
+}

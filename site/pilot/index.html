@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Try Second Look 0.6 on one real task. Help us measure preparation effort, adopted improvements and actual second use.">
+  <meta name="theme-color" content="#f5f3eb">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; script-src 'none'; style-src 'self'; object-src 'none'; base-uri 'none'">
+  <meta property="og:title" content="Does Second Look earn a second use?">
+  <meta property="og:description" content="A small, open-source user pilot. Real tasks, honest feedback, no new API account.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="../icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="pilot.css">
+  <title>Second Look — try one real task</title>
+</head>
+<body class="pilot-page">
+<a class="skip" href="#main">Skip to content</a>
+<header class="shell">
+  <a class="brand" href="../" aria-label="Second Look home"><span class="mark" aria-hidden="true">◉</span> second look<span class="version">0.6 beta</span></a>
+  <nav aria-label="Pilot navigation"><a href="#try">Try a task</a><a href="#ko" lang="ko">한국어</a></nav>
+</header>
+<main id="main" class="shell pilot-content">
+  <section class="pilot-hero">
+    <p class="eyebrow"><span class="dot"></span> USER PILOT · REVIEW ON 23 OCT 2026</p>
+    <h1>Does it earn<br><em>a second use?</em></h1>
+    <p class="pilot-lede">Help decide whether Second Look is worth building further. Try one real task. Tell us what you adopted, rejected, or found too hard to prepare.</p>
+    <div class="actions"><a class="button primary" href="#try">Try your own task ↓</a><a class="button secondary" href="../import-demo/">Preview the report ↗</a></div>
+    <p class="fine">The preview uses hand-authored candidates. No installation or login needed to view it.</p>
+  </section>
+  <div class="pilot-grid">
+    <section class="pilot-card" aria-labelledby="fit-title">
+      <p class="eyebrow">A SMALL, REAL TASK</p><h2 id="fit-title">Is this for you?</h2>
+      <p>You have an existing <strong>static HTML/CSS/JS</strong> page with something unfinished, or an AI revision you want to check.</p>
+      <p>You can run Python 3.11+ on macOS or Linux. If you need a new candidate, use the AI tool you already have.</p>
+      <p class="fine">Backends, arbitrary repositories and Python execution are outside this beta. Don't buy a subscription or API credits for the pilot. Your existing tool's normal quota and generation cost still apply.</p>
+    </section>
+    <section class="pilot-card" aria-labelledby="learn-title">
+      <p class="eyebrow">VALUE BEFORE MORE FEATURES</p><h2 id="learn-title">What we're testing</h2>
+      <p>Can <strong>3 external developers</strong> complete a real comparison? Do <strong>2 return</strong> for a different task?</p>
+      <p>We also need an adopted improvement or avoided regression, and measured time or token benefit over the usual method.</p>
+      <p class="fine">Features are on hold while we learn. Stars, downloads and an intention to return don't count as actual use. Results are pending.</p>
+    </section>
+  </div>
+  <section id="try" class="pilot-section">
+    <p class="eyebrow">ONE ATTEMPT IS USEFUL FEEDBACK</p><h2>Bring work you already care about.</h2>
+    <ol class="pilot-steps">
+      <li><strong>Pick a small task.</strong> Write what it should do, one improvement to make and one behavior to preserve. Keep those criteria fixed.</li>
+      <li><strong>Start a timer.</strong> <a href="../#start">Install v0.6</a>, then follow the <a href="https://github.com/mandu5/secondlook/blob/main/docs/quickstart.md#use-your-own-static-app">own-project capture guide</a>. Stop and report the barrier if preparation exceeds 20 minutes.</li>
+      <li><strong>Compare a candidate.</strong> Follow <a href="https://github.com/mandu5/secondlook/blob/main/docs/external-models.md">prepare → external generation → assess</a>. The external generation and saving its response are manual. Local assessment makes no model calls.</li>
+      <li><strong>Make an actual decision.</strong> Inspect checks, regressions and screenshots. Keep the original, adopt a change, or reject the comparison. Tell us why.</li>
+    </ol>
+    <div class="pilot-note"><strong>Stopped during setup? That counts as feedback.</strong><p>Twenty minutes is a preparation limit, not a promised completion time. Include installation and writing checks. Record generation/waiting and review time separately.</p></div>
+    <div class="actions"><a class="button primary feedback-link" href="https://github.com/mandu5/secondlook/issues/new?template=experience.yml">Report a result or blocker ↗</a></div>
+    <p class="fine">GitHub sign-in required to submit. Issues are public. A short description and timings are enough; keep private code, prompts, logs and screenshots out. Unknown usage is fine.</p>
+  </section>
+  <section class="pilot-section">
+    <h2>Did another real task bring you back?</h2>
+    <p>Add a <a href="https://github.com/mandu5/secondlook/blob/main/docs/pilot-v0.6.md#second-task-follow-up">second-task comment</a> to your first issue. A rerun or another candidate for the same task doesn't count as a return. Don't create a task just to meet the pilot's target.</p>
+    <details><summary>Optional: compare with your normal workflow</summary><p>Use the same starting artifact, goal, model/settings and acceptance criteria in fresh copies. Compare a normal direct request plus manual review with Second Look. Record method order, all preparation/review time, waiting, failures and comparable usage if available. Stop within your existing quota.</p><p><a href="https://github.com/mandu5/secondlook/blob/main/docs/pilot-v0.6.md#compare-with-the-usual-method">Read the comparison procedure ↗</a></p></details>
+  </section>
+  <section id="ko" class="pilot-section" lang="ko">
+    <p class="eyebrow">한국어 참여 안내</p><h2>실제 작업 하나로<br>써볼 가치가 있는지 알려 주세요.</h2>
+    <p>기능을 더 만들기 전에, 준비에 든 노력만큼 도움이 되는지 확인합니다. <strong>외부 사용자 3명, 그중 2명의 다른 과제 재사용</strong>이 목표이며, 실제 채택한 개선·막은 회귀와 기존 방식 대비 이득도 필요합니다. 아직 결과는 확인되지 않았습니다.</p>
+    <ol class="pilot-steps">
+      <li><strong>대상:</strong> 직접 고치려던 작은 static HTML/CSS/JS 작업. Python 3.11+와 macOS/Linux가 필요합니다. 생성은 기존 AI 도구에서 수동으로 하며, 이번 참여를 위해 새로 결제할 필요는 없습니다.</li>
+      <li><strong>준비:</strong> 원래 목적, 개선할 점, 유지할 기능을 적고 시간을 재 주세요. <a href="../#start">설치</a>와 <a href="https://github.com/mandu5/secondlook/blob/main/docs/quickstart.md#use-your-own-static-app">내 작업 등록</a>을 포함해 준비가 20분을 넘으면 중단하고 막힌 부분을 알려 주세요.</li>
+      <li><strong>확인:</strong> <a href="https://github.com/mandu5/secondlook/blob/main/docs/external-models.md">요청 준비 → 외부 생성 → 로컬 비교</a> 후 실제 채택·거절한 내용과 이유를 남깁니다. 생성 대기와 검토 시간은 따로 적고, 모르는 비용·토큰은 미확인으로 남겨 주세요.</li>
+      <li><strong>재사용:</strong> 다른 실제 과제에도 사용했다면 처음 작성한 이슈에 댓글을 추가해 주세요. 같은 작업을 다시 실행한 것은 두 번째 사용으로 세지 않습니다.</li>
+    </ol>
+    <div class="actions"><a class="button primary feedback-link" href="https://github.com/mandu5/secondlook/issues/new?template=experience.yml">결과·막힌 점 남기기 ↗</a><a class="button secondary" href="../import-demo/">설치 없이 예제 보기 ↗</a></div>
+    <p class="fine">한국어로 작성해도 됩니다. GitHub 로그인 후 공개 이슈로 접수됩니다. 코드·prompt·개인정보를 올릴 필요는 없습니다. 기존 AI 도구의 생성 비용·사용 한도는 별도로 적용됩니다.</p>
+  </section>
+  <section class="pilot-section pilot-end"><p>Decision checkpoint: <strong>23 October 2026, KST.</strong> A small pilot can justify another experiment; it cannot establish SOTA or general market demand.</p><a class="text-link" href="https://github.com/mandu5/secondlook/blob/main/docs/pilot-v0.6.md">Read the fixed decision rules ↗</a></section>
+</main>
+<footer class="shell"><a class="brand" href="../"><span class="mark" aria-hidden="true">◉</span> second look</a><span>Open source · Your files stay local unless you choose to share.</span><div><a href="https://github.com/mandu5/secondlook">Source</a><a href="https://github.com/mandu5/secondlook/releases/tag/v0.6.0">v0.6 release</a></div></footer>
+</body>
+</html>

@@ -1,47 +1,75 @@
-# Share-ready introduction
+# v0.6 pilot invitations — drafts, not posted
 
-The repository and demo are the release surfaces. The text below is prepared
-copy; it has not been posted to social networks or sent to other people.
+Prepared 2026-10-09. The guide and feedback form are the public intake surfaces.
+The copy below has not been sent to anyone or posted to a community. No
+participants, testimonials, measured savings or model superiority are implied.
+Use one relevant channel first, record the actual post URL and reach if known,
+and do not cross-post repeatedly or ask for votes/stars.
 
-## English
+## 한국어 — 개발자 지인 또는 허용된 커뮤니티
 
-**Show Second Look: give old AI work a new model without losing the original problem**
+**예전에 AI로 만든 작은 웹 작업, 새 결과가 정말 나아졌는지 비교해 보실 분 3명을 찾습니다.**
 
-Every new model makes me wonder which old projects are worth trying again.
-Second Look preserves the original request, failures and source; chooses tasks
-within a budget; and compares a patch, a rethink-then-patch, and a clean rebuild.
-The result puts functional checks, regressions, screenshots and actual cost together.
+제가 만든 오픈소스 Second Look을 계속 개발할 가치가 있는지 확인하고 있습니다.
+원래 요구와 유지할 기능을 기록하고, 기존 AI 도구에서 받은 수정 결과를 가져와
+기능 검사·회귀·스크린샷을 비교하는 작은 CLI입니다.
 
-The first adapter supports trusted static HTML/CSS/JS with Claude Code. There is
-a no-key demo, local installation diagnostics and a portable sharing command that
-excludes source and raw prompts by default. No background paid runs or auto-adoption.
+현재는 static HTML/CSS/JS만 지원합니다. Python 3.11+와 macOS/Linux가
+필요하고, AI 생성 단계는 쓰던 도구에서 수동으로 진행합니다. 추가 API 계정은
+필요 없지만 기존 도구의 사용 한도나 생성 비용은 그대로 적용됩니다.
+이 테스트를 위해 결제할 필요는 없습니다.
 
-In two existing-project trials, all three workflows passed the same requirements.
-Rebuilding cost least on one; patching on the other. We also kept the story of a
-bad evaluator that initially punished a valid new DOM. These are small workflow
-experiments, not a SOTA or model-uplift claim.
+실제로 고치려던 작은 작업 하나로 써 보고, 준비에 얼마나 걸렸고 무엇을
+채택하거나 포기했는지 알려 주세요. 준비가 20분을 넘으면 중단해도 됩니다.
+그 불편함도 확인하려는 내용입니다. 다른 실제 과제에도 다시 쓰게 된다면
+처음 남긴 이슈에 후속 경험을 적어 주세요.
 
-Try it: https://mandu5.github.io/secondlook/
-Source: https://github.com/mandu5/secondlook
+검증된 절약률이나 모델 우위를 주장하는 도구는 아닙니다. 코드나 private
+prompt를 보낼 필요도 없습니다. GitHub 피드백은 공개되니 민감한 내용은
+빼 주세요. 참여 안내와 설치 없는 예제는 로그인 없이 볼 수 있습니다.
 
-I would like to learn which part costs you most: recovering the original intent,
-choosing what to rerun, writing acceptance checks, or deciding what to adopt.
-
-## 한국어
-
-**새 모델이 나올 때마다 예전 작업을 다시 돌릴 가치가 있을까? Second Look을 공개합니다.**
-
-원래 요청·실패 이유·결과물을 보관하고, 예산 안에서 다시 풀 과제를 골라
-기존 수정 / 문제 재정의 후 수정 / 기존 코드 없이 재구현한 결과를 비교합니다.
-기능 검사, 회귀, 화면, 토큰과 실제 비용을 한 보고서에서 봅니다.
-
-첫 adapter는 static HTML/CSS/JS + Claude Code입니다. 모델 계정 없이 보는
-데모와 설치 진단, 원본·prompt를 기본 제외하는 공유 기능을 넣었습니다.
-두 기존 프로젝트에서는 기능 점수가 같았지만 가장 저렴한 방식은 달랐습니다.
-옛 DOM 구조를 강제했던 잘못된 검사와 수정 과정도 공개합니다.
-
-데모: https://mandu5.github.io/secondlook/
+참여 안내: https://mandu5.github.io/secondlook/pilot/#ko
 코드: https://github.com/mandu5/secondlook
 
-작은 beta이며 SOTA·모델 향상·일반적인 토큰 절약률을 주장하지 않습니다.
-어떤 예전 작업을 다시 풀었고 무엇을 실제로 채택했는지 피드백을 받고 싶습니다.
+## English — relevant developer channel
+
+**Looking for 3 developers to test whether an AI revision is worth adopting.**
+
+I built Second Look, an MIT-licensed CLI, and I'm checking whether it is worth
+developing further. It preserves a task's requirements, imports a revision from
+the AI tool you already use, and compares behavior checks, regressions and
+screenshots against the original.
+
+The beta supports trusted static HTML/CSS/JS on macOS/Linux with Python 3.11+.
+Generation happens manually in your existing AI tool. No new API account is
+needed; that tool's normal quota/cost still applies. Don't buy anything for this
+trial.
+
+Try one small task you actually intended to revisit. Tell me how long preparation
+took and what you adopted, rejected or couldn't finish. Stop if setup takes more
+than 20 minutes: that is useful feedback. If a different real task brings you
+back, add a follow-up to your first issue.
+
+This isn't a measured token-savings or model-superiority claim. No private code
+or prompts are requested. The GitHub feedback form is public; the guide and
+hand-authored example need no login.
+
+Guide: https://mandu5.github.io/secondlook/pilot/
+Source: https://github.com/mandu5/secondlook
+
+## Channel rules and handoff
+
+For a personal introduction, send only to someone who could use the supported
+workflow. For a community, check its current self-promotion/research rules and
+obtain the account owner's posting instruction. Do not assume permission to post
+to a Slack, Discord, subreddit, mailing list or personal account.
+
+Hacker News requires [human-written text and no automated posting](https://news.ycombinator.com/newsguidelines.html).
+These AI-prepared drafts must not be pasted into HN. If the owner chooses HN,
+they should write and submit their own account of the work. The
+[Show HN guidelines](https://news.ycombinator.com/showhn.html) also ask for
+something people can try rather than a landing page or fundraiser, so the
+working repository is the relevant link. No HN submission has been made.
+
+Record the actual channel, post URL, publication time and known reach after
+posting. A drafted invitation or published intake page is not recruited users.

@@ -11,6 +11,11 @@
 
 MIT · Python 3.11+ · macOS / Linux · **0.6 beta**
 
+**사용자 검증 중:** 실제 작업 하나에서 채택한 변화나 준비 중 막힌 점을
+알려 주세요. [참여 안내](https://mandu5.github.io/secondlook/pilot/#ko) ·
+[10월 23일 검토 기준](docs/pilot-v0.6.md). v0.6은 계속 사용할 수 있으며,
+실제 사용 가치를 확인할 때까지 기능 확장을 보류합니다.
+
 ## 모델 계정 없이 시작
 
 ```bash

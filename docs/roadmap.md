@@ -22,7 +22,14 @@ keeping external generation manual and metadata unverified. See the
 
 ## Next evidence
 
-Proposed pilot: 5–8 consenting developers, roughly 20 previously abandoned/imperfect tasks, two weeks. No interviews or recruitment have occurred. Measure setup time, adopted improvements per dollar/token, regressions, deferral reasons and reuse for another task. Include unsuccessful attempts. One sample is not a population success rate.
+Feature expansion is on hold for the [v0.6 user pilot](pilot-v0.6.md), with a
+checkpoint on October 23, 2026 (KST). This smaller decision gate replaces the
+earlier proposed 5–8-person pilot: at least 3 external users complete a comparison,
+2 return for a distinct task, and consequential outcomes plus measured benefit
+over a normal workflow are recorded. The public guide and feedback form are
+intake infrastructure; they do not establish participation. Include abandonment,
+failed comparisons and insufficient exposure in the result. No automatic review
+job or community outreach is registered by this document.
 
 ## Development order, conditional on the pilot
 

@@ -1,22 +1,85 @@
-name: Revisit experience
-description: Tell us what you adopted, rejected, or found too hard to prepare.
+name: v0.6 pilot — result or blocker
+description: Report a real task, including setup failures. English or Korean is welcome.
+title: "[Pilot] "
 body:
+  - type: markdown
+    attributes:
+      value: |
+        This is a public GitHub issue. Share a short, non-sensitive description, not source code, prompts, session logs, or private screenshots. No email address is needed.
+
+        First attempt: open one issue. Second task or correction: comment on your first issue using the [follow-up template](https://github.com/mandu5/secondlook/blob/main/docs/pilot-v0.6.md#second-task-follow-up). A failed setup is useful feedback too.
+
+        [Pilot guide / 한국어 안내](https://mandu5.github.io/secondlook/pilot/) · [Decision rules](https://github.com/mandu5/secondlook/blob/main/docs/pilot-v0.6.md)
+  - type: dropdown
+    id: relationship
+    attributes:
+      label: Your relationship to Second Look
+      options:
+        - External participant using my own task
+        - Maintainer or contributor
+        - Checking the bundled demonstration only
+    validations:
+      required: true
   - type: textarea
     id: task
     attributes:
-      label: What problem did you revisit?
-      description: Include the original purpose and why the previous work was insufficient. Avoid private details.
+      label: Your actual task
+      description: What did the old work need to do? What was wrong or unfinished, and what had to keep working? Do not identify a private project.
+    validations:
+      required: true
+  - type: dropdown
+    id: stage
+    attributes:
+      label: How far did you get?
+      options:
+        - Stopped during installation or setup
+        - Prepared a request but stopped before generating
+        - Generated a candidate but could not finish assessment
+        - Read a comparison and kept the original
+        - Read a comparison and adopted a change
+    validations:
+      required: true
+  - type: input
+    id: preparation
+    attributes:
+      label: Preparation time in minutes
+      description: Include installation, writing requirements/checks, and preparing the request. Enter unknown if you did not measure it. Include time spent before giving up.
+      placeholder: "18, or unknown"
     validations:
       required: true
   - type: textarea
     id: outcome
     attributes:
-      label: What did you adopt or reject, and why?
-      description: Unchanged results, failures and regressions are useful too. A reviewed share summary is optional.
+      label: What happened, and did it help?
+      description: State what you actually adopted, what regression you avoided, or exactly where you stopped. No improvement is a valid result. A higher check score alone is not adoption.
     validations:
       required: true
   - type: textarea
-    id: friction
+    id: comparison
     attributes:
-      label: Setup effort and reuse
-      description: Roughly how long did preparation take? Would you use it on a second task?
+      label: Comparison with your usual method, if measured
+      description: Optional. Use the same original task, model/settings and acceptance criteria in fresh copies. Distinguish stopwatch/usage records from estimates. Missing tokens/cost remain unknown; existing subscriptions still use quota.
+      placeholder: |
+        Comparator: direct request to my AI tool / another tool / none
+        Model/settings and method order:
+        Usual method: active minutes / waiting minutes / tokens / cost / accepted outcome
+        Second Look: active minutes / waiting minutes / tokens / cost / accepted outcome
+        Measurements or estimates? Include all preparation and failed attempts:
+        Did either method miss an improvement or regression?
+  - type: input
+    id: environment
+    attributes:
+      label: Version and environment, if relevant
+      placeholder: "Second Look 0.6.0, macOS, existing chat tool; no account details"
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Optional public evidence
+      description: A reviewed public PR, sanitized share summary, or short reproducible description. Keep local source, raw responses, prompts and screenshots private unless you deliberately review and publish them. Self-reports are welcome and will be identified as such.
+  - type: checkboxes
+    id: public-report
+    attributes:
+      label: Before submitting
+      options:
+        - label: I understand this issue is public and have removed private information.
+          required: true
